@@ -3,79 +3,105 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ஓம் சக்தி மளிகை ஸ்டோர்</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ஓம் சக்தி மளிகை ஸ்டோர் | தே.புடையூர்</title>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: auto;
-  padding: 16px;
-  background: #fff8e7;
-  color: #222;
-}
-.shop {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px #ddd;
-}
-h1 { text-align: center; color: #166534; }
-.center { text-align: center; }
-select, input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border: 0;
-  border-radius: 8px;
-  color: white;
-  background: #16803c;
-  font-size: 16px;
-}
-.note { color: #555; font-size: 14px; }
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#29251d}
+header{background:#14532d;color:white;text-align:center;padding:28px 16px}
+header h1{font-size:28px;margin:8px 0}
+header p{margin:8px 0}
+nav{background:#facc15;padding:12px;text-align:center}
+nav a{color:#422006;text-decoration:none;font-weight:bold;margin:0 8px}
+section{padding:22px 16px;max-width:900px;margin:auto}
+h2{color:#166534}
+.hero{text-align:center;background:#fff;padding:24px;border-radius:16px;margin-top:18px}
+.hero .emoji{font-size:56px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.item{background:white;border-radius:12px;padding:18px 10px;text-align:center;box-shadow:0 2px 8px #ddd}
+.item .pic{font-size:42px}
+.item h3{margin:10px 0 6px}
+.price{color:#166534;font-weight:bold}
+button,.btn{display:block;width:100%;border:0;border-radius:9px;padding:13px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
+.gold{background:#d97706}
+input,select{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+footer{background:#14532d;color:white;text-align:center;padding:24px 12px;margin-top:24px}
+.small{font-size:14px;color:#655f52}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-<div class="shop">
+<header>
+  <div style="font-size:42px">🛕 🙏 🛕</div>
   <h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
-  <p class="center">📍 தே.புடையூர்</p>
-  <p class="center">நம்பிக்கை • தரம் • விலை குறைவு</p>
-  <hr>
-  <h3>📦 எங்கள் பொருட்கள்</h3>
-  <label for="product">பொருளைத் தேர்வு செய்யவும்:</label>
+  <p>📍 தே.புடையூர்</p>
+  <p><b>நம்பிக்கை • தரம் • விலை குறைவு</b></p>
+</header>
+<nav>
+  <a href="#products">பொருட்கள்</a>
+  <a href="#order">ஆர்டர்</a>
+  <a href="#contact">தொடர்பு</a>
+</nav>
+<section class="hero">
+  <div class="emoji">🛍️</div>
+  <h2>உங்கள் அன்பான வரவேற்பு!</h2>
+  <p>அன்றாட மளிகைப் பொருட்களை எளிதாகத் தேர்வு செய்யுங்கள்.</p>
+  <a class="btn" href="#products">பொருட்களைப் பாருங்கள்</a>
+</section>
+<section id="products">
+  <h2>🛍️ எங்கள் பொருட்கள்</h2>
+  <p class="small">இவை மாதிரி படங்கள். விலையை WhatsApp மூலம் உறுதிப்படுத்திக் கொள்ளுங்கள்.</p>
+  <div class="grid">
+    <div class="item"><div class="pic">🍚</div><h3>அரிசி</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🍬</div><h3>சர்க்கரை</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🫘</div><h3>துவரம் பருப்பு</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🛢️</div><h3>சமையல் எண்ணெய்</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🌾</div><h3>கோதுமை</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">☕</div><h3>தேயிலை</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🧂</div><h3>உப்பு</h3><div class="price">விலை கேட்கவும்</div></div>
+    <div class="item"><div class="pic">🍪</div><h3>பிஸ்கட்</h3><div class="price">விலை கேட்கவும்</div></div>
+  </div>
+</section>
+<section id="order">
+  <h2>📲 WhatsApp ஆர்டர்</h2>
+  <label for="product">பொருளைத் தேர்வு செய்யவும்</label>
   <select id="product">
-    <option value="அரிசி">அரிசி</option>
-    <option value="சர்க்கரை">சர்க்கரை</option>
-    <option value="துவரம் பருப்பு">துவரம் பருப்பு</option>
-    <option value="சமையல் எண்ணெய்">சமையல் எண்ணெய்</option>
+    <option>அரிசி</option>
+    <option>சர்க்கரை</option>
+    <option>துவரம் பருப்பு</option>
+    <option>சமையல் எண்ணெய்</option>
+    <option>கோதுமை</option>
+    <option>தேயிலை</option>
+    <option>உப்பு</option>
+    <option>பிஸ்கட்</option>
+    <option>மற்ற பொருட்கள்</option>
   </select>
-  <label for="qty">அளவு / எண்ணிக்கை:</label>
+  <label for="qty">அளவு / எண்ணிக்கை</label>
   <input id="qty" type="number" min="1" value="1">
-  <p class="note">குறிப்பு: பொருட்களின் விலையை கடையில் உறுதிப்படுத்திக் கொள்ளவும்.</p>
-  <button onclick="order('919626665623')">WhatsApp Order — 9626665623</button>
-  <button onclick="order('919787750266')">WhatsApp Order — 9787750266</button>
-</div>
+  <button onclick="order('919626665623')">WhatsApp ஆர்டர் — 9626665623</button>
+  <button class="gold" onclick="order('919787750266')">WhatsApp ஆர்டர் — 9787750266</button>
+</section>
+<section id="contact">
+  <h2>📍 எங்களைத் தொடர்புகொள்ள</h2>
+  <p><b>கடை:</b> ஓம் சக்தி மளிகை ஸ்டோர்</p>
+  <p><b>ஊர்:</b> தே.புடையூர்</p>
+  <p>📞 9626665623</p>
+  <p>📞 9787750266</p>
+  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Om+Sakthi+Maligai+Store+T.+Pudaiyur+Tamil+Nadu" target="_blank" rel="noopener">📍 Google Maps-ல் கடையைத் தேடவும்</a>
+  <p class="small">குறிப்பு: Maps இணைப்பு கடையின் சரியான இடத்தை உறுதிப்படுத்தியதல்ல; தேடல் முடிவுகளைத் திறக்கும்.</p>
+</section>
+<footer>
+  <h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
+  <p>தே.புடையூர்</p>
+  <p>நம்பிக்கை • தரம் • விலை குறைவு</p>
+</footer>
 <script>
-function order(number) {
-  const product = document.getElementById('product').value;
-  const qty = document.getElementById('qty').value;
-  if (!qty || Number(qty) < 1) {
-    alert('சரியான அளவை உள்ளிடுங்கள்');
-    return;
-  }
-  const message = 'வணக்கம், ஓம் சக்தி மளிகை ஸ்டோர். எனக்கு ' +
-    product + ' — அளவு: ' + qty + ' வேண்டும். விலையை தெரிவிக்கவும்.';
-  window.open(
-    'https://wa.me/' + number + '?text=' + encodeURIComponent(message),
-    '_blank'
-  );
+function order(number){
+  const product=document.getElementById('product').value;
+  const qty=document.getElementById('qty').value;
+  if(!qty||Number(qty)<1){alert('சரியான அளவை உள்ளிடுங்கள்');return;}
+  const message='வணக்கம், ஓம் சக்தி மளிகை ஸ்டோர். எனக்கு '+product+' — அளவு: '+qty+' வேண்டும். விலையைத் தெரிவிக்கவும்.';
+  window.open('https://wa.me/'+number+'?text='+encodeURIComponent(message),'_blank');
 }
 </script>
 </body>
