@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ஓம் சக்தி மளிகை ஸ்டோர்</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 16px;
+  background: #fff8e7;
+  color: #222;
+}
+.shop {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #ddd;
+}
+h1 { text-align: center; color: #166534; }
+.center { text-align: center; }
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #16803c;
+  font-size: 16px;
+}
+.note { color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="shop">
+  <h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
+  <p class="center">📍 தே.புடையூர்</p>
+  <p class="center">நம்பிக்கை • தரம் • விலை குறைவு</p>
+  <hr>
+  <h3>📦 எங்கள் பொருட்கள்</h3>
+  <label for="product">பொருளைத் தேர்வு செய்யவும்:</label>
+  <select id="product">
+    <option value="அரிசி">அரிசி</option>
+    <option value="சர்க்கரை">சர்க்கரை</option>
+    <option value="துவரம் பருப்பு">துவரம் பருப்பு</option>
+    <option value="சமையல் எண்ணெய்">சமையல் எண்ணெய்</option>
+  </select>
+  <label for="qty">அளவு / எண்ணிக்கை:</label>
+  <input id="qty" type="number" min="1" value="1">
+  <p class="note">குறிப்பு: பொருட்களின் விலையை கடையில் உறுதிப்படுத்திக் கொள்ளவும்.</p>
+  <button onclick="order('919626665623')">WhatsApp Order — 9626665623</button>
+  <button onclick="order('919787750266')">WhatsApp Order — 9787750266</button>
+</div>
+<script>
+function order(number) {
+  const product = document.getElementById('product').value;
+  const qty = document.getElementById('qty').value;
+  if (!qty || Number(qty) < 1) {
+    alert('சரியான அளவை உள்ளிடுங்கள்');
+    return;
+  }
+  const message = 'வணக்கம், ஓம் சக்தி மளிகை ஸ்டோர். எனக்கு ' +
+    product + ' — அளவு: ' + qty + ' வேண்டும். விலையை தெரிவிக்கவும்.';
+  window.open(
+    'https://wa.me/' + number + '?text=' + encodeURIComponent(message),
+    '_blank'
+  );
+}
+</script>
+</body>
+</html>
