@@ -1,0 +1,20 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff0a6"/>
+      <stop offset="100%" stop-color="#d99b16"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="190" fill="#7b1018"/>
+  <circle cx="200" cy="200" r="178" fill="none" stroke="url(#gold)" stroke-width="6"/>
+  <circle cx="200" cy="200" r="165" fill="none" stroke="#fff0a6" stroke-width="2"/>
+  <text x="200" y="65" text-anchor="middle" font-size="24" fill="#ffe8a0">🙏 ஓம் சக்தி 🙏</text>
+  <path d="M125 112 L155 112 L175 175 L270 175 L290 125 L165 125" fill="none" stroke="#fff0a6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M180 190 L265 190 L250 230 L190 230 Z" fill="url(#gold)"/>
+  <circle cx="200" cy="248" r="10" fill="#fff0a6"/>
+  <circle cx="250" cy="248" r="10" fill="#fff0a6"/>
+  <text x="200" y="290" text-anchor="middle" font-size="25" font-weight="bold" fill="#fff0a6">ஓம் சக்தி</text>
+  <text x="200" y="322" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">மளிகை ஸ்டோர்</text>
+  <text x="200" y="350" text-anchor="middle" font-size="15" fill="#ffe8a0">நம்பிக்கை • தரம் • விலை குறைவு</text>
+</svg>
