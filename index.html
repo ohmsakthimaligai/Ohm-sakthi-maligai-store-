@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -8,104 +9,286 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#fff8e8;color:#29251d}
-header{background:#14532d;color:white;text-align:center;padding:28px 16px}
-header h1{font-size:28px;margin:8px 0}
-header p{margin:8px 0}
+header{background:#14532d;color:white;text-align:center;padding:22px 12px}
+header h1{font-size:25px}
 nav{background:#facc15;padding:12px;text-align:center}
 nav a{color:#422006;text-decoration:none;font-weight:bold;margin:0 8px}
-section{padding:22px 16px;max-width:900px;margin:auto}
+section{padding:20px 14px;max-width:950px;margin:auto}
 h2{color:#166534}
-.hero{text-align:center;background:#fff;padding:24px;border-radius:16px;margin-top:18px}
-.hero .emoji{font-size:56px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.item{background:white;border-radius:12px;padding:18px 10px;text-align:center;box-shadow:0 2px 8px #ddd}
-.item .pic{font-size:42px}
-.item h3{margin:10px 0 6px}
+.hero,.item,.panel{background:white;border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 2px 8px #ddd}
+.hero{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{text-align:center;margin:0;padding:14px 8px}
+.pic{font-size:36px}
 .price{color:#166534;font-weight:bold}
-button,.btn{display:block;width:100%;border:0;border-radius:9px;padding:13px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
+button,.btn{display:block;width:100%;border:0;border-radius:8px;padding:12px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
 .gold{background:#d97706}
-input,select{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
-footer{background:#14532d;color:white;text-align:center;padding:24px 12px;margin-top:24px}
-.small{font-size:14px;color:#655f52}
+.red{background:#b91c1c}
+input,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+.small{font-size:13px;color:#655f52}
+footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:20px}
+.hidden{display:none}
 @media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
-  <img
-  src="https://drive.google.com/thumbnail?id=1HiefMv9K7EUEvK2mHu1WbO5y7nJ72cgV&sz=w1200"
-  alt="பெரியாண்டவர் பெரியநாயகி துணை - ஓம் சக்தி மளிகை ஸ்டோர்"
-  style="width:180px;max-width:90%;height:auto;">
-  <h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
-  <p>📍 தே.புடையூர்</p>
-  <p><b>நம்பிக்கை • தரம் • விலை குறைவு</b></p>
+<img src="https://drive.google.com/thumbnail?id=1HiefMv9K7EUEvK2mHu1WbO5y7nJ72cgV&sz=w1200"
+alt="ஓம் சக்தி மளிகை ஸ்டோர் பேனர்" style="width:180px;max-width:90%;height:auto">
+<h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
+<p>📍 தே.புடையூர்</p>
+<b>நம்பிக்கை • தரம் • விலை குறைவு</b>
 </header>
 <nav>
-  <a href="#products">பொருட்கள்</a>
-  <a href="#order">ஆர்டர்</a>
-  <a href="#contact">தொடர்பு</a>
+<a href="#products">பொருட்கள்</a>
+<a href="#order">ஆர்டர்</a>
+<a href="#contact">தொடர்பு</a>
+<a href="#owner">Owner Login</a>
 </nav>
+
 <section class="hero">
-  <div class="emoji">🛍️</div>
-  <h2>உங்கள் அன்பான வரவேற்பு!</h2>
-  <p>அன்றாட மளிகைப் பொருட்களை எளிதாகத் தேர்வு செய்யுங்கள்.</p>
-  <a class="btn" href="#products">பொருட்களைப் பாருங்கள்</a>
+<h2>🛍️ அன்புடன் வரவேற்கிறோம்!</h2>
+<p>அன்றாட மளிகைப் பொருட்களை எளிதாகத் தேர்வு செய்யுங்கள்.</p>
+<a class="btn" href="#products">பொருட்களைப் பாருங்கள்</a>
 </section>
+
 <section id="products">
-  <h2>🛍️ எங்கள் பொருட்கள்</h2>
-  <p class="small">இவை மாதிரி படங்கள். விலையை WhatsApp மூலம் உறுதிப்படுத்திக் கொள்ளுங்கள்.</p>
-  <div class="grid">
-    <div class="item"><div class="pic">🍚</div><h3>அரிசி</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🍬</div><h3>சர்க்கரை</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🫘</div><h3>துவரம் பருப்பு</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🛢️</div><h3>சமையல் எண்ணெய்</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🌾</div><h3>கோதுமை</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">☕</div><h3>தேயிலை</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🧂</div><h3>உப்பு</h3><div class="price">விலை கேட்கவும்</div></div>
-    <div class="item"><div class="pic">🍪</div><h3>பிஸ்கட்</h3><div class="price">விலை கேட்கவும்</div></div>
-  </div>
+<h2>🛍️ எங்கள் பொருட்கள்</h2>
+<p id="loadmsg" class="small">பொருட்கள் ஏற்றப்படுகின்றன...</p>
+<div id="productsGrid" class="grid"></div>
 </section>
+
 <section id="order">
-  <h2>📲 WhatsApp ஆர்டர்</h2>
-  <label for="product">பொருளைத் தேர்வு செய்யவும்</label>
-  <select id="product">
-    <option>அரிசி</option>
-    <option>சர்க்கரை</option>
-    <option>துவரம் பருப்பு</option>
-    <option>சமையல் எண்ணெய்</option>
-    <option>கோதுமை</option>
-    <option>தேயிலை</option>
-    <option>உப்பு</option>
-    <option>பிஸ்கட்</option>
-    <option>மற்ற பொருட்கள்</option>
-  </select>
-  <label for="qty">அளவு / எண்ணிக்கை</label>
-  <input id="qty" type="number" min="1" value="1">
-  <button onclick="order('919626665623')">WhatsApp ஆர்டர் — 9626665623</button>
-  <button class="gold" onclick="order('919787750266')">WhatsApp ஆர்டர் — 9787750266</button>
+<h2>📲 WhatsApp ஆர்டர்</h2>
+<label>பொருளைத் தேர்வு செய்யவும்</label>
+<select id="product"><option>பொருட்கள் ஏற்றப்படுகின்றன...</option></select>
+<label>அளவு / எண்ணிக்கை</label>
+<input id="qty" type="number" min="1" value="1">
+<button onclick="order('919626665623')">WhatsApp ஆர்டர் — 9626665623</button>
+<button class="gold" onclick="order('919787750266')">WhatsApp ஆர்டர் — 9787750266</button>
 </section>
+
 <section id="contact">
-  <h2>📍 எங்களைத் தொடர்புகொள்ள</h2>
-  <p><b>கடை:</b> ஓம் சக்தி மளிகை ஸ்டோர்</p>
-  <p><b>ஊர்:</b> தே.புடையூர்</p>
-  <p>📞 9626665623</p>
-  <p>📞 9787750266</p>
-  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Om+Sakthi+Maligai+Store+T.+Pudaiyur+Tamil+Nadu" target="_blank" rel="noopener">📍 Google Maps-ல் கடையைத் தேடவும்</a>
-  <p class="small">குறிப்பு: Maps இணைப்பு கடையின் சரியான இடத்தை உறுதிப்படுத்தியதல்ல; தேடல் முடிவுகளைத் திறக்கும்.</p>
+<h2>📍 தொடர்புக்கு</h2>
+<p>கடை: ஓம் சக்தி மளிகை ஸ்டோர்</p>
+<p>ஊர்: தே.புடையூர்</p>
+<p>📞 9626665623</p><p>📞 9787750266</p>
+<a class="btn" href="https://maps.app.goo.gl/Tzis9bkDn8UWtnd68?g_st=ac" target="_blank" rel="noopener">📍 Google Maps</a>
 </section>
+
+<section id="owner">
+<h2>🔐 உரிமையாளர் பகுதி</h2>
+<div id="loginPanel" class="panel">
+<p>உரிமையாளர் Email மற்றும் Password மூலம் உள்நுழையவும்.</p>
+<input id="ownerEmail" type="email" placeholder="Owner Email">
+<input id="ownerPassword" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p id="loginMsg" class="small"></p>
+</div>
+
+<div id="adminPanel" class="panel hidden">
+<h3>பொருளைச் சேர்க்க / மாற்ற</h3>
+<p class="small">புதிய பொருளைச் சேர்க்கவும் அல்லது கீழே பட்டியலில் உள்ள பொருளைத் தேர்ந்தெடுத்து மாற்றவும்.</p>
+<label>ஏற்கெனவே உள்ள பொருள் (மாற்ற மட்டும்)</label>
+<select id="editProduct" onchange="selectProduct()">
+<option value="">புதிய பொருள் சேர்க்க</option>
+</select>
+<input id="pname" placeholder="பொருளின் பெயர்">
+<input id="pcategory" placeholder="வகை (உதா: அரிசி வகைகள்)">
+<input id="pprice" type="number" min="0" step="0.01" placeholder="விலை ரூபாயில்">
+<input id="pstock" type="number" min="0" step="1" placeholder="இருப்பு எண்ணிக்கை">
+<input id="pemoji" placeholder="படக் குறியீடு (உதா: 🍚)">
+<label><input id="pactive" type="checkbox" checked style="width:auto"> விற்பனையில் உள்ளது</label>
+<button onclick="saveProduct()">💾 சேமிக்கவும்</button>
+<button class="gold" onclick="clearForm()">புதிய பொருளுக்கு படிவத்தைத் தயார் செய்</button>
+<button class="red" onclick="logout()">Logout</button>
+<p id="adminMsg" class="small"></p>
+</div>
+</section>
+
 <footer>
-  <h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
-  <p>தே.புடையூர்</p>
-  <p>நம்பிக்கை • தரம் • விலை குறைவு</p>
+<h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
+<p>தே.புடையூர்</p>
+<p>நம்பிக்கை • தரம் • விலை குறைவு</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function order(number){
-  const product=document.getElementById('product').value;
-  const qty=document.getElementById('qty').value;
-  if(!qty||Number(qty)<1){alert('சரியான அளவை உள்ளிடுங்கள்');return;}
-  const message='வணக்கம், ஓம் சக்தி மளிகை ஸ்டோர். எனக்கு '+product+' — அளவு: '+qty+' வேண்டும். விலையைத் தெரிவிக்கவும்.';
-  window.open('https://wa.me/'+number+'?text='+encodeURIComponent(message),'_blank');
+const SUPABASE_URL = 'https://ltugxepaeytnhjohoirq.supabase.co';
+const SUPABASE_KEY = 'YOUR_SUPABASE_PUBLISHABLE_KEY';
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let products = [];
+let editingId = null;
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
 }
+
+async function loadProducts() {
+  const msg = document.getElementById('loadmsg');
+  msg.textContent = 'பொருட்கள் ஏற்றப்படுகின்றன...';
+  const { data, error } = await db.from('products')
+    .select('id,name,category,price,stock_qty,emoji,is_active')
+    .eq('is_active', true)
+    .order('name');
+
+  if (error) {
+    msg.textContent = 'பொருட்களை ஏற்ற முடியவில்லை. Supabase URL, key மற்றும் அனுமதிகளைச் சரிபார்க்கவும்.';
+    console.error(error);
+    return;
+  }
+
+  products = data || [];
+  msg.textContent = products.length
+    ? 'கடையில் உள்ள பொருட்கள் மற்றும் விலைகள்'
+    : 'பொருட்கள் இன்னும் சேர்க்கப்படவில்லை.';
+
+  document.getElementById('productsGrid').innerHTML = products.map(p => `
+    <div class="item">
+      <div class="pic">${escapeHtml(p.emoji || '🛍️')}</div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <p class="small">${escapeHtml(p.category || '')}</p>
+      <div class="price">₹${Number(p.price || 0).toFixed(2)}</div>
+      <p class="small">${Number(p.stock_qty || 0) > 0
+        ? 'இருப்பு: ' + Number(p.stock_qty)
+        : 'இருப்பு இல்லை'}</p>
+    </div>`).join('');
+
+  const productSelect = document.getElementById('product');
+  productSelect.innerHTML = products.map(p =>
+    `<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`
+  ).join('') + '<option value="other">மற்ற பொருட்கள்</option>';
+
+  const editSelect = document.getElementById('editProduct');
+  editSelect.innerHTML = '<option value="">புதிய பொருள் சேர்க்க</option>' +
+    products.map(p => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`).join('');
+}
+
+async function login() {
+  const email = document.getElementById('ownerEmail').value.trim();
+  const password = document.getElementById('ownerPassword').value;
+  const msg = document.getElementById('loginMsg');
+  msg.textContent = 'உள்நுழைகிறது...';
+
+  const { error } = await db.auth.signInWithPassword({ email, password });
+  if (error) {
+    msg.textContent = 'Login தோல்வி: Email / Password-ஐச் சரிபார்க்கவும்.';
+    return;
+  }
+
+  const { data: { user } } = await db.auth.getUser();
+  if (!user) {
+    msg.textContent = 'உரிமையாளர் விவரங்களைச் சரிபார்க்க முடியவில்லை.';
+    await db.auth.signOut();
+    return;
+  }
+
+  document.getElementById('loginPanel').classList.add('hidden');
+  document.getElementById('adminPanel').classList.remove('hidden');
+  document.getElementById('adminMsg').textContent = 'Login வெற்றி. பொருட்களை மாற்றலாம்.';
+  document.getElementById('ownerPassword').value = '';
+  await loadProducts();
+}
+
+function selectProduct() {
+  const id = document.getElementById('editProduct').value;
+  const p = products.find(item => String(item.id) === id);
+  if (!p) { clearForm(); return; }
+
+  editingId = p.id;
+  document.getElementById('pname').value = p.name || '';
+  document.getElementById('pcategory').value = p.category || '';
+  document.getElementById('pprice').value = p.price ?? '';
+  document.getElementById('pstock').value = p.stock_qty ?? 0;
+  document.getElementById('pemoji').value = p.emoji || '🛍️';
+  document.getElementById('pactive').checked = !!p.is_active;
+}
+
+function clearForm() {
+  editingId = null;
+  document.getElementById('editProduct').value = '';
+  document.getElementById('pname').value = '';
+  document.getElementById('pcategory').value = '';
+  document.getElementById('pprice').value = '';
+  document.getElementById('pstock').value = '0';
+  document.getElementById('pemoji').value = '🛍️';
+  document.getElementById('pactive').checked = true;
+}
+
+async function saveProduct() {
+  const msg = document.getElementById('adminMsg');
+  const name = document.getElementById('pname').value.trim();
+  const category = document.getElementById('pcategory').value.trim();
+  const price = Number(document.getElementById('pprice').value);
+  const stock = Number(document.getElementById('pstock').value);
+  const emoji = document.getElementById('pemoji').value.trim() || '🛍️';
+  const active = document.getElementById('pactive').checked;
+
+  if (!name || document.getElementById('pprice').value === '' ||
+      !Number.isFinite(price) || price < 0 ||
+      !Number.isInteger(stock) || stock < 0) {
+    msg.textContent = 'பெயர், சரியான விலை, இருப்பு எண்ணிக்கை ஆகியவற்றை உள்ளிடுங்கள்.';
+    return;
+  }
+
+  const record = {
+    name, category, price, stock_qty: stock,
+    emoji, is_active: active
+  };
+
+  msg.textContent = 'சேமிக்கிறது...';
+  let result;
+  if (editingId) {
+    result = await db.from('products').update(record).eq('id', editingId);
+  } else {
+    result = await db.from('products').insert(record);
+  }
+
+  if (result.error) {
+    msg.textContent = 'சேமிக்க முடியவில்லை. Supabase Owner policy-ஐச் சரிபார்க்கவும்.';
+    console.error(result.error);
+    return;
+  }
+
+  msg.textContent = 'சேமிக்கப்பட்டது!';
+  clearForm();
+  await loadProducts();
+}
+
+async function logout() {
+  await db.auth.signOut();
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('loginPanel').classList.remove('hidden');
+  document.getElementById('loginMsg').textContent = 'Logout செய்யப்பட்டுவிட்டது.';
+  clearForm();
+}
+
+async function order(number) {
+  const selected = document.getElementById('product');
+  const id = selected.value;
+  const qty = Number(document.getElementById('qty').value);
+  if (!Number.isInteger(qty) || qty < 1) {
+    alert('சரியான அளவை உள்ளிடுங்கள்'); return;
+  }
+  const p = products.find(item => String(item.id) === id);
+  const name = p ? p.name : 'மற்ற பொருட்கள்';
+  const message = 'வணக்கம், ஓம் சக்தி மளிகை ஸ்டோர். எனக்கு ' +
+    name + ' — அளவு: ' + qty + ' வேண்டும். விலையை உறுதிப்படுத்தவும்.';
+  window.open('https://wa.me/' + number + '?text=' +
+    encodeURIComponent(message), '_blank');
+}
+
+loadProducts();
+
+db.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    document.getElementById('adminPanel').classList.add('hidden');
+    document.getElementById('loginPanel').classList.remove('hidden');
+  }
+});
 </script>
 </body>
 </html>
