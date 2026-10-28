@@ -99,6 +99,8 @@ footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:
 <input id="pprice" type="number" min="0" step="0.01" placeholder="விலை (₹)">
 <input id="pstock" type="number" min="0" step="1" placeholder="இருப்பு எண்ணிக்கை">
 <input id="pemoji" placeholder="படக் குறியீடு (உதா: 🍚)">
+<label for="pimage">பொருளின் பட URL</label>
+<input id="pimage" type="url" placeholder="https://example.com/product.jpg">
 <label><input id="pactive" type="checkbox" checked style="width:auto"> பொருள் விற்பனைக்கு உள்ளது</label>
 <button onclick="saveProduct()">சேமிக்கவும்</button>
 <button class="gold" onclick="clearForm()">புதிய பொருள்</button>
@@ -152,12 +154,7 @@ function renderProducts(){
  const category=$('categoryFilter').value;
  const list=products.filter(p=>!category||p.category===category);
 
- const photos = {
-  'அரிசி வகைகள்':'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500',
-  'பருப்பு வகைகள்':'https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=500',
-  'எண்ணெய் வகைகள்':'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500',
-  'மசாலா பொடிகள்':'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500'
- };
+ const photos = {};
 
  $('productsGrid').innerHTML=list.map(p=>`
  <div class="item">
@@ -187,7 +184,7 @@ function chooseProduct(id){
 async function loadProducts(){
  $('loadmsg').textContent='பொருட்கள் ஏற்றப்படுகின்றன...';
  const {data,error}=await db.from('products')
- .select('id,name,category,price,stock_qty,emoji,is_active')
+ .select('id,name,category,price,stock_qty,emoji,is_active,image_url')
  .eq('is_active',true).order('name');
 
 
@@ -240,7 +237,7 @@ function selectProduct(){
  $('pcategory').value=p.category||categories[0];
  $('pprice').value=p.price??'';
  $('pstock').value=p.stock_qty??0;
- $('pemoji').value=p.emoji||'🛒';
+ $('pimage').value=p.image_url||'';
  $('pactive').checked=!!p.is_active;
 }
 
@@ -268,10 +265,14 @@ async function saveProduct(){
  }
 
  const record={
-  name,category,price,stock_qty:stock,
+  name,
+  category,
+  price,
+  stock_qty:stock,
   emoji:$('pemoji').value.trim()||'🛒',
+  image_url:$('pimage').value.trim(),
   is_active:$('pactive').checked
- };
+};
 
  $('adminMsg').textContent='சேமிக்கப்படுகிறது...';
 
