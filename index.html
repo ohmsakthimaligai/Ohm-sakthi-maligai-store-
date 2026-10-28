@@ -190,11 +190,15 @@ async function loadProducts(){
  .select('id,name,category,price,stock_qty,emoji,is_active')
  .eq('is_active',true).order('name');
 
- if(error){
-  $('loadmsg').textContent='பொருட்களை ஏற்ற முடியவில்லை. Supabase அட்டவணை மற்றும் அனுமதிகளைச் சரிபார்க்கவும்.';
-  console.error(error);
+
+if(error){
+  $('loadmsg').textContent =
+    'பிழை: ' + error.message +
+    ' | Code: ' + (error.code || 'தெரியவில்லை');
+  console.error('Supabase products error:', error);
   return;
- }
+}
+
 
  products=data||[];
  $('loadmsg').textContent=products.length?
