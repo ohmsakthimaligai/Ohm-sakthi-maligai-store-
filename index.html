@@ -159,7 +159,7 @@ function renderProducts(){
  $('productsGrid').innerHTML=list.map(p=>`
  <div class="item">
   <img
-   src="${photos[p.category] || ''}"
+   src="${esc(p.image_url || '')}"
    alt="${esc(p.name)}"
    style="width:100%;height:140px;object-fit:contain;border-radius:8px"
    onerror="this.style.display='none'"
@@ -249,6 +249,7 @@ function clearForm(){
  $('pprice').value='';
  $('pstock').value='0';
  $('pemoji').value='🛒';
+ $('pimage').value='';
  $('pactive').checked=true;
 }
 
