@@ -147,19 +147,35 @@ function fillCategories(){
  categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
 }
 
+
 function renderProducts(){
  const category=$('categoryFilter').value;
  const list=products.filter(p=>!category||p.category===category);
+
+ const photos = {
+  'அரிசி வகைகள்':'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500',
+  'பருப்பு வகைகள்':'https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=500',
+  'எண்ணெய் வகைகள்':'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500',
+  'மசாலா பொடிகள்':'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500'
+ };
+
  $('productsGrid').innerHTML=list.map(p=>`
  <div class="item">
- <div class="pic">${esc(p.emoji||'🛒')}</div>
- <h3>${esc(p.name)}</h3>
- <p class="small">${esc(p.category||'')}</p>
- <div class="price">₹${Number(p.price||0).toFixed(2)}</div>
- <p class="small">${Number(p.stock_qty||0)>0?'இருப்பு: '+Number(p.stock_qty):'இருப்பு இல்லை'}</p>
- <button onclick="chooseProduct('${esc(p.id)}')">ஆர்டர் செய்ய</button>
+  <img
+   src="${photos[p.category] || ''}"
+   alt="${esc(p.name)}"
+   style="width:100%;height:140px;object-fit:contain;border-radius:8px"
+   onerror="this.style.display='none'"
+  >
+  <div class="pic">${esc(p.emoji||'🛒')}</div>
+  <h3>${esc(p.name)}</h3>
+  <p class="small">${esc(p.category||'')}</p>
+  <div class="price">₹${Number(p.price||0).toFixed(2)}</div>
+  <p class="small">${Number(p.stock_qty||0)>0?'இருப்பு: '+Number(p.stock_qty):'இருப்பு இல்லை'}</p>
+  <button onclick="chooseProduct('${esc(p.id)}')">ஆர்டர் செய்ய</button>
  </div>`).join('');
 }
+
 
 function chooseProduct(id){
  $('product').value=id;
