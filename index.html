@@ -282,7 +282,7 @@ async function saveProduct(){
  :await db.from('products').insert(record);
 
  if(result.error){
-  $('adminMsg').textContent='சேமிக்க முடியவில்லை. Supabase அனுமதிகளைச் சரிபார்க்கவும்.';
+  $('adminMsg').textContent='பிழை: '+result.error.message;
   console.error(result.error);
   return;
  }
