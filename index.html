@@ -62,7 +62,7 @@ footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:
 <section id="order">
 <h2>📲 WhatsApp மூலம் ஆர்டர்</h2>
 <label for="product">பொருளைத் தேர்ந்தெடுக்கவும்</label>
-<select id="product"></select>
+<select id="product" onchange="updateTotal()"></select>
 <label for="qty">அளவு / எண்ணிக்கை</label>
 <input id="qty" type="number" min="1" value="1">
 <p id="totalPrice" class="price">மொத்தம்: ₹0.00</p>
