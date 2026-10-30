@@ -343,6 +343,20 @@ async function order(number){
  const name=p?p.name:'மற்ற பொருள்';
 
  const total=p?Number(p.price||0)*qty:0;
+const location = await new Promise(resolve => {
+ if (!navigator.geolocation) {
+  resolve('இருப்பிடம் கிடைக்கவில்லை');
+  return;
+ }
+
+ navigator.geolocation.getCurrentPosition(
+  pos => resolve(
+   `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
+  ),
+  () => resolve('இருப்பிட அனுமதி வழங்கப்படவில்லை'),
+  { enableHighAccuracy:true, timeout:15000 }
+ );
+});
 
 const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
 
