@@ -330,7 +330,7 @@ function updateTotal(){
  const total=Number(p.price||0)*qty;
  $('totalPrice').textContent='மொத்தம்: ₹'+total.toFixed(2);
 }
-function order(number){
+async function order(number){
  const id=$('product').value;
  const qty=Number($('qty').value);
 
