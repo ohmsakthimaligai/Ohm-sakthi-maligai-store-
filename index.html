@@ -316,7 +316,19 @@ async function logout(){
  $('loginMsg').textContent='வெளியேறிவிட்டீர்கள்.';
  clearForm();
 }
+function updateTotal(){
+ const id=$('product').value;
+ const qty=Number($('qty').value);
+ const p=products.find(x=>String(x.id)===id);
 
+ if(!p || !Number.isFinite(qty) || qty<1){
+  $('totalPrice').textContent='மொத்தம்: ₹0.00';
+  return;
+ }
+
+ const total=Number(p.price||0)*qty;
+ $('totalPrice').textContent='மொத்தம்: ₹'+total.toFixed(2);
+}
 function order(number){
  const id=$('product').value;
  const qty=Number($('qty').value);
