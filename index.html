@@ -178,7 +178,7 @@ function renderProducts(){
   <div class="pic">${esc(p.emoji||'🛒')}</div>
   <h3>${esc(p.name)}</h3>
   <p class="small">${esc(p.category||'')}</p>
-  <div class="price">₹${Number(p.price||0).toFixed(2)}</div>
+  <div class="price">₹${Number(p.price||0).toFixed(2)} / ${esc(p.unit||'பாக்கெட்')}</div>
   <p class="small">${Number(p.stock_qty||0)>0?'இருப்பு: '+Number(p.stock_qty):'இருப்பு இல்லை'}</p>
   <button onclick="chooseProduct('${esc(p.id)}')">ஆர்டர் செய்ய</button>
  </div>`).join('');
