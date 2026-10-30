@@ -245,6 +245,8 @@ function selectProduct(){
  editingId=p.id;
  $('pname').value=p.name||'';
  $('pcategory').value=p.category||categories[0];
+ $('pprice').value=p.price??'';
+ $('pemoji').value=p.emoji||'🛒';
  $('punit').value=p.unit||'பாக்கெட்';
  $('pstock').value=p.stock_qty??0;
  $('pimage').value=p.image_url||'';
