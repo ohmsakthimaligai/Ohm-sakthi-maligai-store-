@@ -359,7 +359,13 @@ function updateTotal(){
 async function order(number){
  const id=$('product').value;
  const qty=Number($('qty').value);
+ const customerName=$('customerName').value.trim();
+ const customerPhone=$('customerPhone').value.trim();
 
+ if(!customerName || !/^[6-9]\d{9}$/.test(customerPhone)){
+  alert('சரியான பெயர் மற்றும் 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.');
+  return;
+ }
  if(!Number.isInteger(qty)||qty<1){
   alert('சரியான எண்ணிக்கையை உள்ளிடவும்.');
   return;
@@ -423,7 +429,8 @@ async function order(number){
  const grandTotal=total+deliveryFee;
 
  const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
-
+வாடிக்கையாளர் பெயர்: ${customerName}
+மொபைல் எண்: ${customerPhone}
 பொருள்: ${name}
 எண்ணிக்கை: ${qty}
 பொருள் விலை: ₹${total.toFixed(2)}
