@@ -195,7 +195,7 @@ function chooseProduct(id){
 async function loadProducts(){
  $('loadmsg').textContent='பொருட்கள் ஏற்றப்படுகின்றன...';
  const {data,error}=await db.from('products')
- .select('id,name,category,price,stock_qty,emoji,is_active,image_url')
+ .select('id,name,category,unit,price,stock_qty,emoji,is_active,image_url')
  .eq('is_active',true).order('name');
 
 
