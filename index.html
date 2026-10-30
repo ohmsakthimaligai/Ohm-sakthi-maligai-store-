@@ -364,7 +364,7 @@ const message=`வணக்கம்! ஓம் சக்தி மளிகை 
 எண்ணிக்கை: ${qty}
 அலகு விலை: ${p?'₹'+Number(p.price||0).toFixed(2)+' / '+(p.unit||'பாக்கெட்'):'தெரிவிக்கவும்'}
 மொத்த விலை: ${p?'₹'+total.toFixed(2):'தெரிவிக்கவும்'}
-
+வாடிக்கையாளர் இருப்பிடம்: ${location}
 தயவுசெய்து ஆர்டரை உறுதிப்படுத்தவும்.`;
 
  window.open('https://wa.me/'+number+'?text='+encodeURIComponent(message),'_blank');
