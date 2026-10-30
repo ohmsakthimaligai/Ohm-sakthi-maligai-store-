@@ -218,7 +218,7 @@ if(error){
  $('product').innerHTML=products.map(p=>
  `<option value="${esc(p.id)}">${esc(p.name)} — ₹${Number(p.price||0).toFixed(2)}</option>`
  ).join('')+'<option value="other">மற்ற பொருள்</option>';
-
+updateTotal();
  $('editProduct').innerHTML='<option value="">புதிய பொருள் சேர்க்க</option>'+
  products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
 }
