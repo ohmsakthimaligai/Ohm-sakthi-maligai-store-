@@ -346,6 +346,13 @@ async function logout(){
 function updateTotal(){
  const id=$('product').value;
  const qty=Number($('qty').value);
+const customerName=$('customerName').value.trim();
+const customerPhone=$('customerPhone').value.trim();
+
+if(!customerName || !/^[6-9]\d{9}$/.test(customerPhone)){
+ alert('சரியான பெயர் மற்றும் 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.');
+ return;
+}
  const p=products.find(x=>String(x.id)===id);
 
  if(!p || !Number.isFinite(qty) || qty<1){
