@@ -430,6 +430,10 @@ async function order(number){
 const {error: saveError}=await db.from('orders').insert({
  customer_name:customerName,
  customer_phone:customerPhone,
+customer_name:customerName,
+customer_phone:customerPhone,
+phone:customerPhone,
+product_name:name,
  product_name:name,
  quantity:qty,
  product_price:total,
