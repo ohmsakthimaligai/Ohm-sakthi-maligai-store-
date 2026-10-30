@@ -96,7 +96,17 @@ footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:
 <input id="pname" placeholder="பொருளின் பெயர்">
 <label for="pcategory">பொருள் வகை</label>
 <select id="pcategory"></select>
-<input id="pprice" type="number" min="0" step="0.01" placeholder="விலை (₹)">
+<select id="punit">
+  <option value="கிலோ">கிலோ</option>
+  <option value="கிராம்">கிராம்</option>
+  <option value="லிட்டர்">லிட்டர்</option>
+  <option value="மில்லி லிட்டர்">மில்லி லிட்டர்</option>
+  <option value="பாக்கெட்">பாக்கெட்</option>
+  <option value="எண்ணிக்கை">எண்ணிக்கை</option>
+  <option value="பெட்டி">பெட்டி</option>
+  <option value="பாட்டில்">பாட்டில்</option>
+  <option value="மூட்டை">மூட்டை</option>
+</select>
 <input id="pstock" type="number" min="0" step="1" placeholder="இருப்பு எண்ணிக்கை">
 <input id="pemoji" placeholder="படக் குறியீடு (உதா: 🍚)">
 <label for="pimage">பொருளின் பட URL</label>
