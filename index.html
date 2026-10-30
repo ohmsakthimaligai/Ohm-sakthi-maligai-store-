@@ -441,7 +441,7 @@ const {error: saveError}=await db.from('orders').insert({
   delivery_fee: deliveryFee,
   total_amount: grandTotal,
   total: grandTotal,
-  payment_method: 'Cash',
+  payment_method: 'cash',
   customer_location: deliveryType==='home'?location:null
 });
 
