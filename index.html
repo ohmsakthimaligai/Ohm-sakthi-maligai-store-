@@ -190,6 +190,7 @@ function renderProducts(){
 
 function chooseProduct(id){
  $('product').value=id;
+updateTotal();
  $('order').scrollIntoView({behavior:'smooth'});
 }
 
