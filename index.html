@@ -427,6 +427,23 @@ async function order(number){
  }
 
  const grandTotal=total+deliveryFee;
+const {error: saveError}=await db.from('orders').insert({
+ customer_name:customerName,
+ customer_phone:customerPhone,
+ product_name:name,
+ quantity:qty,
+ product_price:total,
+ delivery_type:deliveryType,
+ distance_km:distance,
+ delivery_fee:deliveryFee,
+ total_amount:grandTotal,
+ customer_location:deliveryType==='home'?location:null
+});
+
+if(saveError){
+ alert('ஆர்டர் சேமிக்க முடியவில்லை: '+saveError.message);
+ return;
+}
 
  const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
 வாடிக்கையாளர் பெயர்: ${customerName}
