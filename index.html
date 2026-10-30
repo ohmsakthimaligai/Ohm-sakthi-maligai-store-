@@ -357,33 +357,78 @@ async function order(number){
 
  const p=products.find(x=>String(x.id)===id);
  const name=p?p.name:'மற்ற பொருள்';
-
  const total=p?Number(p.price||0)*qty:0;
-const location = await new Promise(resolve => {
- if (!navigator.geolocation) {
-  resolve('இருப்பிடம் கிடைக்கவில்லை');
-  return;
+
+ const deliveryType=
+ document.querySelector('input[name="delivery"]:checked')?.value || 'pickup';
+
+ let distance=0;
+ let deliveryFee=0;
+ let location='இருப்பிடம் வழங்கப்படவில்லை';
+
+ if(deliveryType==='home'){
+  location=await new Promise(resolve=>{
+   if(!navigator.geolocation){
+    resolve(null);
+    return;
+   }
+
+   navigator.geolocation.getCurrentPosition(
+    pos=>resolve({
+     lat:pos.coords.latitude,
+     lon:pos.coords.longitude
+    }),
+    ()=>resolve(null),
+    {enableHighAccuracy:true,timeout:15000}
+   );
+  });
+
+  if(!location){
+   alert('வீட்டு டெலிவரிக்கு இருப்பிட அனுமதி தேவை.');
+   return;
+  }
+
+  const storeLat=11.504087;
+  const storeLon=79.201432;
+
+  const R=6371;
+  const rad=x=>x*Math.PI/180;
+
+  const dLat=rad(location.lat-storeLat);
+  const dLon=rad(location.lon-storeLon);
+
+  const a=
+   Math.sin(dLat/2)**2+
+   Math.cos(rad(storeLat))*
+   Math.cos(rad(location.lat))*
+   Math.sin(dLon/2)**2;
+
+  distance=2*R*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+
+  deliveryFee=distance<=2?0:Math.ceil(distance-2)*10;
+
+  location=`https://www.google.com/maps?q=${location.lat},${location.lon}`;
  }
 
- navigator.geolocation.getCurrentPosition(
-  pos => resolve(
-   `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
-  ),
-  () => resolve('இருப்பிட அனுமதி வழங்கப்படவில்லை'),
-  { enableHighAccuracy:true, timeout:15000 }
- );
-});
+ const grandTotal=total+deliveryFee;
 
-const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
+ const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
 
 பொருள்: ${name}
 எண்ணிக்கை: ${qty}
-அலகு விலை: ${p?'₹'+Number(p.price||0).toFixed(2)+' / '+(p.unit||'பாக்கெட்'):'தெரிவிக்கவும்'}
-மொத்த விலை: ${p?'₹'+total.toFixed(2):'தெரிவிக்கவும்'}
+பொருள் விலை: ₹${total.toFixed(2)}
+வாங்கும் முறை: ${deliveryType==='home'?'வீட்டு டெலிவரி':'கடையில் வாங்குதல்'}
+கடை முதல் தூரம்: ${deliveryType==='home'?distance.toFixed(2)+' கி.மீ.':'பொருந்தாது'}
+டெலிவரி கட்டணம்: ₹${deliveryFee}
+மொத்தம்: ₹${grandTotal.toFixed(2)}
 வாடிக்கையாளர் இருப்பிடம்: ${location}
+
 தயவுசெய்து ஆர்டரை உறுதிப்படுத்தவும்.`;
 
- window.open('https://wa.me/'+number+'?text='+encodeURIComponent(message),'_blank');
+ window.open(
+  'https://wa.me/'+number+'?text='+encodeURIComponent(message),
+  '_blank'
+ );
 }
 
 fillCategories();
