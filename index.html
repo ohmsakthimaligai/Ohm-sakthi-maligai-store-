@@ -428,29 +428,26 @@ async function order(number){
 
  const grandTotal=total+deliveryFee;
 const {error: saveError}=await db.from('orders').insert({
- customer_name:customerName,
- customer_phone:customerPhone,
-customer_name:customerName,
-customer_phone:customerPhone,
-phone:customerPhone,
-product_name:name,
- product_name:name,
- quantity:qty,
- product_price:total,
- subtotal:total,
- delivery_type:deliveryType,
- order_type:deliveryType==='home'?'delivery':'pickup',
- distance_km:distance,
- delivery_fee:deliveryFee,
- total_amount:grandTotal,
- total:grandTotal,
- payment_method:'Cash',
- customer_location:deliveryType==='home'?location:null
+  customer_name: customerName,
+  customer_phone: customerPhone,
+  phone: customerPhone,
+  product_name: name,
+  quantity: qty,
+  product_price: total,
+  subtotal: total,
+  delivery_type: deliveryType==='home'?'delivery':'pickup',
+  order_type: deliveryType==='home'?'delivery':'pickup',
+  distance_km: distance,
+  delivery_fee: deliveryFee,
+  total_amount: grandTotal,
+  total: grandTotal,
+  payment_method: 'Cash',
+  customer_location: deliveryType==='home'?location:null
 });
 
 if(saveError){
- alert('ஆர்டர் சேமிக்க முடியவில்லை: '+saveError.message);
- return;
+  alert('ஆர்டர் சேமிக்க முடியவில்லை: '+saveError.message);
+  return;
 }
 
  const message=`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
