@@ -583,7 +583,25 @@ async function order(number){
 
   location=`https://www.google.com/maps?q=${location.lat},${location.lon}`;
  }
+if(p){
+  const {data:stockUpdated,error:stockError}=await db.rpc(
+    'decrease_product_stock',
+    {
+      p_product_id:p.id,
+      p_quantity:qty
+    }
+  );
 
+  if(stockError){
+    alert('இருப்பு புதுப்பிக்க முடியவில்லை: '+stockError.message);
+    return;
+  }
+
+  if(stockUpdated!==true){
+    alert('போதுமான பொருள் இருப்பு இல்லை. எண்ணிக்கையைச் சரிபார்க்கவும்.');
+    return;
+  }
+}
  const grandTotal=total+deliveryFee;
  const orderCode = crypto.randomUUID()
   .replace(/-/g, '').slice(0, 12).toUpperCase();
