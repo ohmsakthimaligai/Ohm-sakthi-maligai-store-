@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>роУроорпН роЪроХрпНродро┐ рооро│ро┐роХрпИ ро╕рпНроЯрпЛро░рпН | родрпЗ.рокрпБроЯрпИропрпВро░рпН</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Tamil",sans-serif;background:#fff8e8;color:#29251d}
+header{background:#14532d;color:white;text-align:center;padding:22px 12px}
+header h1{font-size:25px;margin:10px 0}
+nav{background:#facc15;padding:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+nav a{color:#422006;text-decoration:none;font-weight:bold}
+section{padding:18px 14px;max-width:1000px;margin:auto}
+h2{color:#166534}
+.hero,.item,.panel{background:white;border-radius:12px;padding:15px;margin:12px 0;box-shadow:0 2px 8px #ddd}
+.hero{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{text-align:center;margin:0;padding:14px 8px}
+.pic{font-size:34px}
+.price{color:#166534;font-weight:bold}
+button,.btn{display:block;width:100%;border:0;border-radius:8px;padding:12px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+.gold{background:#d97706}
+.danger{background:#b91c1c}
+input,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+input[type="radio"],input[type="checkbox"]{width:auto;margin:8px}
+.small{font-size:13px;color:#655f52}
+footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:20px}
+.hidden{display:none}
+.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-bottom:1px solid #eee;padding:10px 0}
+.cart-actions{display:flex;align-items:center;gap:6px}
+.cart-actions button{width:auto;margin:0;padding:8px 12px}
+.cart-total{font-size:18px;font-weight:bold;color:#166534}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+<h1>ЁЯЫТ роУроорпН роЪроХрпНродро┐ рооро│ро┐роХрпИ ро╕рпНроЯрпЛро░рпН</h1>
+<p>ЁЯУН родрпЗ.рокрпБроЯрпИропрпВро░рпН</p>
+<p><b>роироорпНрокро┐роХрпНроХрпИ тАв родро░роорпН тАв ро╡ро┐ро▓рпИ роХрпБро▒рпИро╡рпБ</b></p>
+</header>
+
+<section class="panel">
+  <h3>ЁЯЪЪ роЯрпЖро▓ро┐ро╡ро░ро┐ ро╡роЪродро┐</h3>
+  <label><input type="radio" name="delivery" value="pickup" checked> ЁЯПк роХроЯрпИропро┐ро▓рпН ро╡ро╛роЩрпНроХрпБродро▓рпН</label>
+  <br><br>
+  <label><input type="radio" name="delivery" value="home"> ЁЯПа ро╡рпАроЯрпНроЯро┐ро▒рпНроХрпБ роЯрпЖро▓ро┐ро╡ро░ро┐</label>
+  <p>ЁЯУН 2 роХро┐.роорпА. ро╡ро░рпИ роЗро▓ро╡роЪ роЯрпЖро▓ро┐ро╡ро░ро┐</p>
+  <p>2 роХро┐.роорпА.роХрпНроХрпБ роорпЗро▓рпН роТро╡рпНро╡рпКро░рпБ роХрпВроЯрпБродро▓рпН роХро┐.роорпА.роХрпНроХрпБроорпН тВ╣10</p>
+</section>
+
+<nav>
+<a href="#products">рокрпКро░рпБроЯрпНроХро│рпН</a>
+<a href="#order">роЖро░рпНроЯро░рпН / Cart</a>
+<a href="#myOrders">роОройрпН роЖро░рпНроЯро░рпНроХро│рпН</a>
+<a href="#contact">родрпКроЯро░рпНрокрпБ</a>
+<a href="#owner">роХроЯрпИ роиро┐ро░рпНро╡ро╛роХроорпН</a>
+</nav>
+
+<section class="hero">
+<h2>ЁЯЩП роЕройрпНрокрпБроЯройрпН ро╡ро░ро╡рпЗро▒рпНроХро┐ро▒рпЛроорпН!</h2>
+<p>рооро│ро┐роХрпИрокрпН рокрпКро░рпБроЯрпНроХро│рпН рооро▒рпНро▒рпБроорпН роЕройрпНро▒ро╛роЯродрпН родрпЗро╡рпИроХро│рпИ роЗроЩрпНроХрпЗ рокро╛ро░рпБроЩрпНроХро│рпН.</p>
+<a class="btn" href="#products">рокрпКро░рпБроЯрпНроХро│рпИрокрпН рокро╛ро░рпНроХрпНроХ</a>
+</section>
+
+<section id="products">
+<h2>ЁЯЫНя╕П роОроЩрпНроХро│рпН рокрпКро░рпБроЯрпНроХро│рпН</h2>
+<label for="categoryFilter">рокрпКро░рпБро│рпН ро╡роХрпИропрпИродрпН родрпЗро░рпНроирпНродрпЖроЯрпБроХрпНроХро╡рпБроорпН</label>
+<select id="categoryFilter" onchange="renderProducts()"><option value="">роЕройрпИродрпНродрпБ ро╡роХрпИроХро│рпБроорпН</option></select>
+<p id="loadmsg" class="small">рокрпКро░рпБроЯрпНроХро│рпН роПро▒рпНро▒рокрпНрокроЯрпБроХро┐ройрпНро▒рой...</p>
+<div id="productsGrid" class="grid"></div>
+</section>
+
+<section id="order">
+<h2>ЁЯЫТ роЙроЩрпНроХро│рпН Cart</h2>
+<div class="panel">
+  <p class="small">рокрпКро░рпБроЯрпНроХро│рпН рокроХрпБродро┐ропро┐ро▓рпН роЙро│рпНро│ тАЬCart-ро▓рпН роЪрпЗро░рпНроХрпНроХтАЭ рокрпКродрпНродро╛ройрпИ роЕро┤рпБродрпНродро┐ рокро▓ рокрпКро░рпБроЯрпНроХро│рпИроЪрпН роЪрпЗро░рпНроХрпНроХро▓ро╛роорпН.</p>
+  <div id="cartList">Cart роХро╛ро▓ро┐ропро╛роХ роЙро│рпНро│родрпБ.</div>
+  <p id="cartSubtotal" class="cart-total">рокрпКро░рпБроЯрпНроХро│ро┐ройрпН роорпКродрпНродроорпН: тВ╣0.00</p>
+  <button class="gold" onclick="clearCart()">Cart-роР роХро╛ро▓ро┐ роЪрпЖропрпНроп</button>
+</div>
+
+<h2>ЁЯУ▓ WhatsApp роорпВро▓роорпН роЖро░рпНроЯро░рпН</h2>
+<label for="customerName">ро╡ро╛роЯро┐роХрпНроХрпИропро╛ро│ро░рпН рокрпЖропро░рпН</label>
+<input id="customerName" type="text" placeholder="роЙроЩрпНроХро│рпН рокрпЖропро░рпН">
+<label for="customerPhone">роорпКрокрпИро▓рпН роОрогрпН</label>
+<input id="customerPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10 роЗро▓роХрпНроХ роорпКрокрпИро▓рпН роОрогрпН">
+<p id="deliveryEstimate" class="small">ро╡ро╛роЩрпНроХрпБроорпН роорпБро▒рпИ: роХроЯрпИропро┐ро▓рпН ро╡ро╛роЩрпНроХрпБродро▓рпН</p>
+<button onclick="order('919626665623')">WhatsApp роЖро░рпНроЯро░рпН тАФ 9626665623</button>
+<button class="gold" onclick="order('919787750266')">WhatsApp роЖро░рпНроЯро░рпН тАФ 9787750266</button>
+<p class="small">роХрпБро▒ро┐рокрпНрокрпБ: WhatsApp родро┐ро▒роирпНродродрпБроорпН роЕройрпБрокрпНрокрпБроорпН рокрпКродрпНродро╛ройрпИ роЕро┤рпБродрпНродро┐ роЖро░рпНроЯро░рпИ роЕройрпБрокрпНрокро╡рпБроорпН.</p>
+</section>
+
+<section id="myOrders">
+<h2>ЁЯУж роОройрпН роЖро░рпНроЯро░рпНроХро│рпН (My Orders)</h2>
+<div class="panel">
+<label>роЖро░рпНроЯро░рпН роХрпБро▒ро┐ропрпАроЯрпБ</label>
+<input id="myOrderCode" type="text" placeholder="роЙроЩрпНроХро│рпН роЖро░рпНроЯро░рпН роХрпБро▒ро┐ропрпАроЯрпБ">
+<label>роЖро░рпНроЯро░рпН роЪрпЖропрпНрод роорпКрокрпИро▓рпН роОрогрпН</label>
+<input id="myOrderPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10 роЗро▓роХрпНроХ роорпКрокрпИро▓рпН роОрогрпН">
+<button onclick="findMyOrder()">роЖро░рпНроЯро░рпИрокрпН рокро╛ро░рпНроХрпНроХ</button>
+<div id="myOrderResult" style="margin-top:15px"></div>
+</div>
+</section>
+
+<section id="contact">
+<h2>ЁЯУЮ родрпКроЯро░рпНрокрпБ роХрпКро│рпНро│</h2>
+<p>роУроорпН роЪроХрпНродро┐ рооро│ро┐роХрпИ ро╕рпНроЯрпЛро░рпН, родрпЗ.рокрпБроЯрпИропрпВро░рпН</p>
+<p>ЁЯУ▒ 9626665623</p><p>ЁЯУ▒ 9787750266</p>
+<a class="btn" href="https://maps.app.goo.gl/Tzis9bkDn8UWtnd68?g_st=ac" target="_blank" rel="noopener">ЁЯУН Google Maps ро╡ро┤ро┐</a>
+</section>
+
+<section id="owner">
+<h2>ЁЯФР роХроЯрпИ роиро┐ро░рпНро╡ро╛роХро┐ роЙро│рпНроирпБро┤рпИро╡рпБ</h2>
+<div id="loginPanel" class="panel">
+<p>роиро┐ро░рпНро╡ро╛роХро┐ рооро┐ройрпНройроЮрпНроЪро▓рпН рооро▒рпНро▒рпБроорпН роХроЯро╡рпБроЪрпНроЪрпКро▓рпНро▓рпИрокрпН рокропройрпНрокроЯрпБродрпНродро╡рпБроорпН.</p>
+<input id="ownerEmail" type="email" placeholder="рооро┐ройрпНройроЮрпНроЪро▓рпН">
+<input id="ownerPassword" type="password" placeholder="роХроЯро╡рпБроЪрпНроЪрпКро▓рпН">
+<button onclick="login()">роЙро│рпНроирпБро┤рпИроп</button>
+<p id="loginMsg" class="small"></p>
+</div>
+<div id="adminPanel" class="panel hidden">
+<h3>рокрпКро░рпБро│рпН роЪрпЗро░рпНроХрпНроХ / ро╡ро┐ро▓рпИ / роЗро░рпБрокрпНрокрпБ рооро╛ро▒рпНро▒</h3>
+<label for="editProduct">роПро▒рпНроХрпЖройро╡рпЗ роЙро│рпНро│ рокрпКро░рпБро│рпН</label>
+<select id="editProduct" onchange="selectProduct()"><option value="">рокрпБродро┐роп рокрпКро░рпБро│рпН роЪрпЗро░рпНроХрпНроХ</option></select>
+<input id="pname" placeholder="рокрпКро░рпБро│ро┐ройрпН рокрпЖропро░рпН">
+<label for="pcategory">рокрпКро░рпБро│рпН ро╡роХрпИ</label><select id="pcategory"></select>
+<select id="punit">
+<option value="роХро┐ро▓рпЛ">роХро┐ро▓рпЛ</option><option value="роХро┐ро░ро╛роорпН">роХро┐ро░ро╛роорпН</option><option value="ро▓ро┐роЯрпНроЯро░рпН">ро▓ро┐роЯрпНроЯро░рпН</option>
+<option value="рооро┐ро▓рпНро▓ро┐ ро▓ро┐роЯрпНроЯро░рпН">рооро┐ро▓рпНро▓ро┐ ро▓ро┐роЯрпНроЯро░рпН</option><option value="рокро╛роХрпНроХрпЖроЯрпН">рокро╛роХрпНроХрпЖроЯрпН</option>
+<option value="роОрогрпНрогро┐роХрпНроХрпИ">роОрогрпНрогро┐роХрпНроХрпИ</option><option value="рокрпЖроЯрпНроЯро┐">рокрпЖроЯрпНроЯро┐</option><option value="рокро╛роЯрпНроЯро┐ро▓рпН">рокро╛роЯрпНроЯро┐ро▓рпН</option><option value="роорпВроЯрпНроЯрпИ">роорпВроЯрпНроЯрпИ</option>
+</select>
+<input id="pprice" type="number" min="0" step="0.01" placeholder="ро╡ро┐ро▓рпИ (тВ╣)">
+<input id="pstock" type="number" min="0" step="1" placeholder="роЗро░рпБрокрпНрокрпБ роОрогрпНрогро┐роХрпНроХрпИ">
+<input id="pemoji" placeholder="рокроЯроХрпН роХрпБро▒ро┐ропрпАроЯрпБ (роЙродро╛: ЁЯНЪ)">
+<label for="pimage">рокрпКро░рпБро│ро┐ройрпН рокроЯ URL</label><input id="pimage" type="url" placeholder="https://example.com/product.jpg">
+<label><input id="pactive" type="checkbox" checked> рокрпКро░рпБро│рпН ро╡ро┐ро▒рпНрокройрпИроХрпНроХрпБ роЙро│рпНро│родрпБ</label>
+<button onclick="saveProduct()">роЪрпЗрооро┐роХрпНроХро╡рпБроорпН</button>
+<button class="gold" onclick="clearForm()">рокрпБродро┐роп рокрпКро░рпБро│рпН</button>
+<button class="danger" onclick="logout()">ро╡рпЖро│ро┐ропрпЗро▒ро╡рпБроорпН</button>
+<p id="adminMsg" class="small"></p>
+<hr><h3>ЁЯУж ро╡ро╛роЯро┐роХрпНроХрпИропро╛ро│ро░рпН роЖро░рпНроЯро░рпНроХро│рпН</h3>
+<button onclick="loadOrders()">ЁЯФД роЖро░рпНроЯро░рпНроХро│рпИрокрпН рокрпБродрпБрокрпНрокро┐роХрпНроХ</button>
+<div id="ordersList">роЖро░рпНроЯро░рпНроХро│рпН роПро▒рпНро▒рокрпНрокроЯрпБроХро┐ройрпНро▒рой...</div>
+</div>
+</section>
+
+<footer><h3>роУроорпН роЪроХрпНродро┐ рооро│ро┐роХрпИ ро╕рпНроЯрпЛро░рпН</h3><p>родрпЗ.рокрпБроЯрпИропрпВро░рпН</p><p>роироорпНрокро┐роХрпНроХрпИ тАв родро░роорпН тАв ро╡ро┐ро▓рпИ роХрпБро▒рпИро╡рпБ</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://ltugxepaeytnhjohoirq.supabase.co';
+const SUPABASE_KEY='sb_publishable_OQtJL5E7Bn2tSugNiLaN_A_z13-Iko5';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const categories=[
+'рооро╛ро╡рпБ ро╡роХрпИроХро│рпН','рокро░рпБрокрпНрокрпБ ро╡роХрпИроХро│рпН','роОрогрпНрогрпЖропрпН ро╡роХрпИроХро│рпН','роороЪро╛ро▓ро╛ рокрпКроЯро┐роХро│рпН','рооро│ро┐роХрпИ роЪро╛рооро╛ройрпНроХро│рпН','рокро┐ро╕рпНроХроЯрпН & ро╕рпНроиро╛роХрпНро╕рпН','роЪрпЛрокрпНрокрпБ & ро╖ро╛роорпНрокрпБ',
+'рокрпВроЬрпИрокрпН рокрпКро░рпБроЯрпНроХро│рпН','роЪро╛роХрпНро▓рпЗроЯрпН & роЗройро┐рокрпНрокрпБроХро│рпН','рокро▒рпНрокроЪрпИ & рокро┐ро░ро╖рпН','роЪро▓ро╡рпИрокрпН рокрпКро░рпБроЯрпНроХро│рпН','роХрпБро│ро┐ро░рпНрокро╛ройроЩрпНроХро│рпН','рокро╛ро▓рпН & родропро┐ро░рпН','роЕро░ро┐роЪро┐ ро╡роХрпИроХро│рпН',
+'роХрпБро┤роирпНродрпИроХро│рпН рокрпКро░рпБроЯрпНроХро│рпН','рооро▒рпНро▒ рокрпКро░рпБроЯрпНроХро│рпН','роЪрпЖро▓рпНрокрпЛройрпН рооро▒рпНро▒рпБроорпН роЙродро┐ро░ро┐рокрпНрокро╛роХроЩрпНроХро│рпН','ро╡рпАроЯрпНроЯрпБ роЙрокропрпЛроХрокрпН рокрпКро░рпБроЯрпНроХро│рпН'
+];
+let products=[];
+let cart=[];
+let editingId=null;
+const $=id=>document.getElementById(id);
+function esc(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function fillCategories(){
+ $('categoryFilter').innerHTML='<option value="">роЕройрпИродрпНродрпБ ро╡роХрпИроХро│рпБроорпН</option>'+categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+ $('pcategory').innerHTML=categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+
+function renderProducts(){
+ const category=$('categoryFilter').value;
+ const list=products.filter(p=>!category||p.category===category);
+ $('productsGrid').innerHTML=list.map(p=>{
+   const inCart=cart.find(x=>x.id===p.id);
+   const available=Number(p.stock_qty||0);
+   return `<div class="item">
+    ${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}" style="width:100%;height:140px;object-fit:contain;border-radius:8px" onerror="this.style.display='none'">`:''}
+    <div class="pic">${esc(p.emoji||'ЁЯЫТ')}</div>
+    <h3>${esc(p.name)}</h3><p class="small">${esc(p.category||'')}</p>
+    <div class="price">тВ╣${Number(p.price||0).toFixed(2)} / ${esc(p.unit||'рокро╛роХрпНроХрпЖроЯрпН')}</div>
+    <p class="small">${available>0?'роЗро░рпБрокрпНрокрпБ: '+available:'роЗро░рпБрокрпНрокрпБ роЗро▓рпНро▓рпИ'}</p>
+    <button ${available<1?'disabled':''} onclick="addToCart('${esc(p.id)}')">${inCart?'роорпЗро▓рпБроорпН роЪрпЗро░рпНроХрпНроХ ('+inCart.quantity+')':'Cart-ро▓рпН роЪрпЗро░рпНроХрпНроХ'}</button>
+   </div>`;
+ }).join('')||'<p>роЗроирпНрод ро╡роХрпИропро┐ро▓рпН рокрпКро░рпБроЯрпНроХро│рпН роЗро▓рпНро▓рпИ.</p>';
+}
+
+function addToCart(id){
+ const p=products.find(x=>String(x.id)===String(id));
+ if(!p)return;
+ const current=cart.find(x=>x.id===id);
+ const nextQty=(current?.quantity||0)+1;
+ if(nextQty>Number(p.stock_qty||0)){alert('рокрпЛродрпБрооро╛рой роЗро░рпБрокрпНрокрпБ роЗро▓рпНро▓рпИ.');return;}
+ if(current)current.quantity=nextQty;
+ else cart.push({id:p.id,name:p.name,unit:p.unit||'рокро╛роХрпНроХрпЖроЯрпН',price:Number(p.price||0),stock_qty:Number(p.stock_qty||0),quantity:1});
+ renderCart();renderProducts();
+}
+function changeCartQty(id,delta){
+ const item=cart.find(x=>x.id===id);if(!item)return;
+ const next=item.quantity+delta;
+ if(next<1){removeFromCart(id);return;}
+ if(next>item.stock_qty){alert('роЗро░рпБрокрпНрокрпБ роОрогрпНрогро┐роХрпНроХрпИропрпИ ро╡ро┐роЯ роЕродро┐роХрооро╛роХ роЪрпЗро░рпНроХрпНроХ роорпБроЯро┐ропро╛родрпБ.');return;}
+ item.quantity=next;renderCart();renderProducts();
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);renderCart();renderProducts();}
+function clearCart(){if(!cart.length)return;if(confirm('Cart-ро▓рпН роЙро│рпНро│ роЕройрпИродрпНродрпБ рокрпКро░рпБроЯрпНроХро│рпИропрпБроорпН роирпАроХрпНроХро╡ро╛?')){cart=[];renderCart();renderProducts();}}
+function cartSubtotal(){return cart.reduce((sum,x)=>sum+x.price*x.quantity,0);}
+function renderCart(){
+ if(!cart.length){$('cartList').textContent='Cart роХро╛ро▓ро┐ропро╛роХ роЙро│рпНро│родрпБ.';$('cartSubtotal').textContent='рокрпКро░рпБроЯрпНроХро│ро┐ройрпН роорпКродрпНродроорпН: тВ╣0.00';return;}
+ $('cartList').innerHTML=cart.map(x=>`<div class="cart-row">
+ <div><b>${esc(x.name)}</b><div class="small">тВ╣${x.price.toFixed(2)} ├Ч ${x.quantity} ${esc(x.unit)} = тВ╣${(x.price*x.quantity).toFixed(2)}</div></div>
+ <div class="cart-actions"><button type="button" onclick="changeCartQty('${esc(x.id)}',-1)">тИТ</button><b>${x.quantity}</b><button type="button" onclick="changeCartQty('${esc(x.id)}',1)">+</button><button type="button" class="danger" onclick="removeFromCart('${esc(x.id)}')">├Ч</button></div>
+ </div>`).join('');
+ $('cartSubtotal').textContent='рокрпКро░рпБроЯрпНроХро│ро┐ройрпН роорпКродрпНродроорпН: тВ╣'+cartSubtotal().toFixed(2);
+}
+
+async function loadProducts(){
+ $('loadmsg').textContent='рокрпКро░рпБроЯрпНроХро│рпН роПро▒рпНро▒рокрпНрокроЯрпБроХро┐ройрпНро▒рой...';
+ const {data,error}=await db.from('products').select('id,name,category,unit,price,stock_qty,emoji,is_active,image_url').eq('is_active',true).order('name');
+ if(error){$('loadmsg').textContent='рокрпКро░рпБроЯрпНроХро│рпИ роПро▒рпНро▒ роорпБроЯро┐ропро╡ро┐ро▓рпНро▓рпИ: '+error.message;console.error(error);return;}
+ products=data||[];
+ // Refresh cart details from current database prices and stock.
+ cart=cart.filter(item=>products.some(p=>p.id===item.id)).map(item=>{
+   const p=products.find(x=>x.id===item.id);
+   return {...item,name:p.name,unit:p.unit||'рокро╛роХрпНроХрпЖроЯрпН',price:Number(p.price||0),stock_qty:Number(p.stock_qty||0),quantity:Math.min(item.quantity,Number(p.stock_qty||0))};
+ }).filter(item=>item.quantity>0);
+ $('loadmsg').textContent=products.length?'рокрпКро░рпБроЯрпНроХро│рпН рокроЯрпНроЯро┐ропро▓рпН':'роЗройрпНройрпБроорпН рокрпКро░рпБроЯрпНроХро│рпН роЪрпЗро░рпНроХрпНроХрокрпНрокроЯро╡ро┐ро▓рпНро▓рпИ.';
+ renderProducts();renderCart();
+ $('editProduct').innerHTML='<option value="">рокрпБродро┐роп рокрпКро░рпБро│рпН роЪрпЗро░рпНроХрпНроХ</option>'+products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+}
+
+async function login(){
+ const email=$('ownerEmail').value.trim(),password=$('ownerPassword').value;
+ $('loginMsg').textContent='роЙро│рпНроирпБро┤рпИроХро┐ро▒родрпБ...';
+ const {error}=await db.auth.signInWithPassword({email,password});
+ if(error){$('loginMsg').textContent='роЙро│рпНроирпБро┤рпИроп роорпБроЯро┐ропро╡ро┐ро▓рпНро▓рпИ. рооро┐ройрпНройроЮрпНроЪро▓рпН рооро▒рпНро▒рпБроорпН роХроЯро╡рпБроЪрпНроЪрпКро▓рпНро▓рпИроЪрпН роЪро░ро┐рокро╛ро░рпНроХрпНроХро╡рпБроорпН.';return;}
+ $('loginPanel').classList.add('hidden');$('adminPanel').classList.remove('hidden');$('ownerPassword').value='';
+ $('adminMsg').textContent='роЙро│рпНроирпБро┤рпИроирпНродрпБро╡ро┐роЯрпНроЯрпАро░рпНроХро│рпН.';await loadProducts();await loadOrders();
+}
+function selectProduct(){
+ const p=products.find(x=>String(x.id)===$('editProduct').value);
+ if(!p){clearForm();return;}
+ editingId=p.id;$('pname').value=p.name||'';$('pcategory').value=p.category||categories[0];$('pprice').value=p.price??'';
+ $('pemoji').value=p.emoji||'ЁЯЫТ';$('punit').value=p.unit||'рокро╛роХрпНроХрпЖроЯрпН';$('pstock').value=p.stock_qty??0;$('pimage').value=p.image_url||'';$('pactive').checked=!!p.is_active;
+}
+function clearForm(){
+ editingId=null;$('editProduct').value='';$('pname').value='';$('pcategory').value=categories[0];$('punit').value='рокро╛роХрпНроХрпЖроЯрпН';
+ $('pprice').value='';$('pstock').value='0';$('pemoji').value='ЁЯЫТ';$('pimage').value='';$('pactive').checked=true;
+}
+async function saveProduct(){
+ const name=$('pname').value.trim(),category=$('pcategory').value,price=Number($('pprice').value),stock=Number($('pstock').value);
+ if(!name||$('pprice').value===''||!Number.isFinite(price)||price<0||!Number.isInteger(stock)||stock<0){$('adminMsg').textContent='рокрпЖропро░рпН, роЪро░ро┐ропро╛рой ро╡ро┐ро▓рпИ, роЗро░рпБрокрпНрокрпБ роОрогрпНрогро┐роХрпНроХрпИ роЖроХро┐ропро╡ро▒рпНро▒рпИ роиро┐ро░рокрпНрокро╡рпБроорпН.';return;}
+ const record={name,category,unit:$('punit').value,price,stock_qty:stock,emoji:$('pemoji').value.trim()||'ЁЯЫТ',image_url:$('pimage').value.trim(),is_active:$('pactive').checked};
+ $('adminMsg').textContent='роЪрпЗрооро┐роХрпНроХрокрпНрокроЯрпБроХро┐ро▒родрпБ...';
+ const result=editingId?await db.from('products').update(record).eq('id',editingId):await db.from('products').insert(record);
+ if(result.error){$('adminMsg').textContent='рокро┐ро┤рпИ: '+result.error.message;return;}
+ $('adminMsg').textContent='рокрпКро░рпБро│рпН роЪрпЗрооро┐роХрпНроХрокрпНрокроЯрпНроЯродрпБ.';clearForm();await loadProducts();await loadOrders();
+}
+
+async function loadOrders(){
+ const box=$('ordersList');box.textContent='роЖро░рпНроЯро░рпНроХро│рпН роПро▒рпНро▒рокрпНрокроЯрпБроХро┐ройрпНро▒рой...';
+ const {data,error}=await db.from('orders').select('*').order('created_at',{ascending:false});
+ if(error){box.textContent='рокро┐ро┤рпИ: '+error.message;return;}
+ if(!data?.length){box.textContent='роЗройрпНройрпБроорпН роЖро░рпНроЯро░рпНроХро│рпН роЗро▓рпНро▓рпИ.';return;}
+ const statusNames={new:'роЖро░рпНроЯро░рпН рокрпЖро▒рокрпНрокроЯрпНроЯродрпБ',preparing:'родропро╛ро░ро╛роХро┐ро▒родрпБ',out_for_delivery:'роЯрпЖро▓ро┐ро╡ро░ро┐роХрпНроХрпБ рокрпБро▒рокрпНрокроЯрпНроЯродрпБ',delivered:'роЯрпЖро▓ро┐ро╡ро░ро┐ роорпБроЯро┐роирпНродродрпБ',cancelled:'роЖро░рпНроЯро░рпН ро░родрпНродрпБ роЪрпЖропрпНропрокрпНрокроЯрпНроЯродрпБ'};
+ box.innerHTML=data.map(o=>`<div class="item" style="text-align:left;margin:10px 0">
+ <h3>ЁЯЫТ ${esc(o.product_name||'рокрпКро░рпБро│рпН')}</h3><p>роЖро░рпНроЯро░рпН роХрпБро▒ро┐ропрпАроЯрпБ: ${esc(o.order_code||'')}</p>
+ <p>ро╡ро╛роЯро┐роХрпНроХрпИропро╛ро│ро░рпН: ${esc(o.customer_name||'')}</p><p>роорпКрокрпИро▓рпН: ${esc(o.customer_phone||o.phone||'')}</p>
+ <p>роорпКродрпНрод роОрогрпНрогро┐роХрпНроХрпИ: ${Number(o.quantity||0)}</p><p>роорпКродрпНродроорпН: тВ╣${Number(o.total||o.to
