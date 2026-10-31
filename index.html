@@ -362,6 +362,7 @@ async function saveProduct(){
  await loadOrders();
 }
 
+
 async function loadOrders(){
   const box = $('ordersList');
   box.textContent = 'ஆர்டர்கள் ஏற்றப்படுகின்றன...';
@@ -380,19 +381,66 @@ async function loadOrders(){
     return;
   }
 
+  const statusNames = {
+    new: 'ஆர்டர் பெறப்பட்டது',
+    preparing: 'தயாராகிறது',
+    out_for_delivery: 'டெலிவரிக்கு புறப்பட்டது',
+    delivered: 'டெலிவரி முடிந்தது',
+    cancelled: 'ஆர்டர் ரத்து செய்யப்பட்டது'
+  };
+
   box.innerHTML = data.map(o => `
     <div class="item" style="text-align:left;margin:10px 0">
       <h3>🛒 ${esc(o.product_name || 'பொருள்')}</h3>
+      <p>ஆர்டர் குறியீடு: ${esc(o.order_code || '')}</p>
       <p>வாடிக்கையாளர்: ${esc(o.customer_name || '')}</p>
       <p>மொபைல்: ${esc(o.customer_phone || o.phone || '')}</p>
       <p>எண்ணிக்கை: ${Number(o.quantity || 0)}</p>
       <p>மொத்தம்: ₹${Number(o.total || o.total_amount || 0).toFixed(2)}</p>
       <p>வாங்கும் முறை: ${esc(o.order_type || '')}</p>
-      <p>நிலை: ${esc(o.status || 'new')}</p>
+
+      <label>📦 ஆர்டர் நிலையை மாற்றவும்</label>
+      <select onchange="updateOrderStatus('${esc(o.id)}',this.value)">
+        <option value="new" ${o.status==='new'?'selected':''}>ஆர்டர் பெறப்பட்டது</option>
+        <option value="preparing" ${o.status==='preparing'?'selected':''}>தயாராகிறது</option>
+        <option value="out_for_delivery" ${o.status==='out_for_delivery'?'selected':''}>டெலிவரிக்கு புறப்பட்டது</option>
+        <option value="delivered" ${o.status==='delivered'?'selected':''}>டெலிவரி முடிந்தது</option>
+        <option value="cancelled" ${o.status==='cancelled'?'selected':''}>ஆர்டர் ரத்து செய்யப்பட்டது</option>
+      </select>
+
+      <p class="small">தற்போதைய நிலை: ${esc(statusNames[o.status] || o.status || 'ஆர்டர் பெறப்பட்டது')}</p>
       <p class="small">${esc(o.created_at || '')}</p>
     </div>
   `).join('');
 }
+
+async function updateOrderStatus(orderId,newStatus){
+  const allowedStatuses = [
+    'new',
+    'preparing',
+    'out_for_delivery',
+    'delivered',
+    'cancelled'
+  ];
+
+  if(!allowedStatuses.includes(newStatus)){
+    alert('தவறான ஆர்டர் நிலை.');
+    return;
+  }
+
+  const {error} = await db.from('orders')
+    .update({status:newStatus})
+    .eq('id',orderId);
+
+  if(error){
+    alert('நிலையை மாற்ற முடியவில்லை: ' + error.message);
+    return;
+  }
+
+  alert('ஆர்டர் நிலை மாற்றப்பட்டது!');
+  await loadOrders();
+}
+
 async function findMyOrder(){
   const code = $('myOrderCode').value.trim().toUpperCase();
   const phone = $('myOrderPhone').value.trim();
