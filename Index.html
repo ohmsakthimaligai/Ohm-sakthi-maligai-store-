@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ஓம் சக்தி மளிகை ஸ்டோர் | தே.புடையூர்</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Tamil",sans-serif;background:#fff8e8;color:#29251d}
+header{background:#14532d;color:white;text-align:center;padding:22px 12px}
+header h1{font-size:25px;margin:10px 0}
+nav{background:#facc15;padding:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+nav a{color:#422006;text-decoration:none;font-weight:bold}
+section{padding:18px 14px;max-width:1000px;margin:auto}
+h2{color:#166534}
+.hero,.item,.panel{background:white;border-radius:12px;padding:15px;margin:12px 0;box-shadow:0 2px 8px #ddd}
+.hero{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{text-align:center;margin:0;padding:14px 8px}
+.pic{font-size:34px}
+.price{color:#166534;font-weight:bold}
+button,.btn{display:block;width:100%;border:0;border-radius:8px;padding:12px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
+.gold{background:#d97706}
+input,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+input[type="radio"]{
+ width:auto;
+ margin:8px;
+}
+.small{font-size:13px;color:#655f52}
+footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:20px}
+.hidden{display:none}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+<h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
+<p>📍 தே.புடையூர்</p>
+<p><b>நம்பிக்கை • தரம் • விலை குறைவு</b></p>
+</header>
+<section style="padding:15px;background:white;border-radius:10px;margin:15px;">
+  <h3>🚚 டெலிவரி வசதி</h3>
+
+  <label>
+    <input type="radio" name="delivery" value="pickup" checked>
+    🏪 கடையில் வாங்குதல்
+  </label>
+  <br><br>
+
+  <label>
+    <input type="radio" name="delivery" value="home">
+    🏠 வீட்டிற்கு டெலிவரி
+  </label>
+
+  <p>📍 2 கி.மீ. வரை இலவச டெலிவரி</p>
+  <p>2 கி.மீ.க்கு மேல் ஒவ்வொரு கூடுதல் கி.மீ.க்கும் ₹10</p>
+</section>
+<nav>
+<a href="#products">பொருட்கள்</a>
+<a href="#order">ஆர்டர்</a>
+<a href="#myOrders">என் ஆர்டர்கள்</a>
+<a href="#contact">தொடர்பு</a>
+<a href="#owner">கடை நிர்வாகம்</a>
+</nav>
+
+<section class="hero">
+<h2>🙏 அன்புடன் வரவேற்கிறோம்!</h2>
+<p>மளிகைப் பொருட்கள் மற்றும் அன்றாடத் தேவைகளை இங்கே பாருங்கள்.</p>
+<a class="btn" href="#products">பொருட்களைப் பார்க்க</a>
+</section>
+
+<section id="products">
+<h2>🛍️ எங்கள் பொருட்கள்</h2>
+<label for="categoryFilter">பொருள் வகையைத் தேர்ந்தெடுக்கவும்</label>
+<select id="categoryFilter" onchange="renderProducts()">
+<option value="">அனைத்து வகைகளும்</option>
+</select>
+<p id="loadmsg" class="small">பொருட்கள் ஏற்றப்படுகின்றன...</p>
+<div id="productsGrid" class="grid"></div>
+</section>
+<section id="myOrders">
+  <h2>📦 என் ஆர்டர்கள் (My Orders)</h2>
+  <div class="panel">
+    <label>ஆர்டர் குறியீடு</label>
+    <input id="myOrderCode" type="text"
+      placeholder="உங்கள் ஆர்டர் குறியீடு">
+
+    <label>ஆர்டர் செய்த மொபைல் எண்</label>
+    <input id="myOrderPhone" type="tel"
+      maxlength="10" placeholder="10 இலக்க மொபைல் எண்">
+
+    <button onclick="findMyOrder()">ஆர்டரைப் பார்க்க</button>
+    <div id="myOrderResult" style="margin-top:15px"></div>
+  </div>
+</section>
+
+<section id="order">
+<h2>📲 WhatsApp மூலம் ஆர்டர்</h2>
+<label for="product">பொருளைத் தேர்ந்தெடுக்கவும்</label>
+<select id="product" onchange="updateTotal()"></select>
+<label for="qty">அளவு / எண்ணிக்கை</label>
+<input id="qty" type="number" min="1" value="1" oninput="updateTotal()">
+<p id="totalPrice" class="price">மொத்தம்: ₹0.00</p>
+<label for="customerName">வாடிக்கையாளர் பெயர்</label>
+<input id="customerName" type="text" placeholder="உங்கள் பெயர்">
+
+<label for="customerPhone">மொபைல் எண்</label>
+<input id="customerPhone" type="tel" maxlength="10"
+placeholder="10 இலக்க மொபைல் எண்">
+<button onclick="order('919626665623')">WhatsApp ஆர்டர் — 9626665623</button>
+<button class="gold" onclick="order('919787750266')">WhatsApp ஆர்டர் — 9787750266</button>
+</section>
+
+<section id="contact">
+<h2>📞 தொடர்பு கொள்ள</h2>
+<p>ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்</p>
+<p>📱 9626665623</p>
+<p>📱 9787750266</p>
+<a class="btn" href="https://maps.app.goo.gl/Tzis9bkDn8UWtnd68?g_st=ac" target="_blank" rel="noopener">📍 Google Maps வழி</a>
+</section>
+
+<section id="owner">
+<h2>🔐 கடை நிர்வாகி உள்நுழைவு</h2>
+<div id="loginPanel" class="panel">
+<p>நிர்வாகி மின்னஞ்சல் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தவும்.</p>
+<input id="ownerEmail" type="email" placeholder="மின்னஞ்சல்">
+<input id="ownerPassword" type="password" placeholder="கடவுச்சொல்">
+<button onclick="login()">உள்நுழைய</button>
+<p id="loginMsg" class="small"></p>
+</div>
+
+<div id="adminPanel" class="panel hidden">
+<h3>பொருள் சேர்க்க / விலை மாற்ற</h3>
+<label for="editProduct">ஏற்கெனவே உள்ள பொருள்</label>
+<select id="editProduct" onchange="selectProduct()">
+<option value="">புதிய பொருள் சேர்க்க</option>
+</select>
+<input id="pname" placeholder="பொருளின் பெயர்">
+<label for="pcategory">பொருள் வகை</label>
+<select id="pcategory"></select>
+<select id="punit">
+  <option value="கிலோ">கிலோ</option>
+  <option value="கிராம்">கிராம்</option>
+  <option value="லிட்டர்">லிட்டர்</option>
+  <option value="மில்லி லிட்டர்">மில்லி லிட்டர்</option>
+  <option value="பாக்கெட்">பாக்கெட்</option>
+  <option value="எண்ணிக்கை">எண்ணிக்கை</option>
+  <option value="பெட்டி">பெட்டி</option>
+  <option value="பாட்டில்">பாட்டில்</option>
+  <option value="மூட்டை">மூட்டை</option>
+</select>
+<input id="pprice" type="number" min="0" step="0.01" placeholder="விலை (₹)">
+<input id="pstock" type="number" min="0" step="1" placeholder="இருப்பு எண்ணிக்கை">
+<input id="pemoji" placeholder="படக் குறியீடு (உதா: 🍚)">
+<label for="pimage">பொருளின் பட URL</label>
+<input id="pimage" type="url" placeholder="https://example.com/product.jpg">
+<label><input id="pactive" type="checkbox" checked style="width:auto"> பொருள் விற்பனைக்கு உள்ளது</label>
+<button onclick="saveProduct()">சேமிக்கவும்</button>
+<button class="gold" onclick="clearForm()">புதிய பொருள்</button>
+<button onclick="logout()">வெளியேறவும்</button>
+<p id="adminMsg" class="small"></p>
+<hr>
+<h3>📦 வாடிக்கையாளர் ஆர்டர்கள்</h3>
+<button onclick="loadOrders()">🔄 ஆர்டர்களைப் புதுப்பிக்க</button>
+<div id="ordersList">
+  ஆர்டர்கள் ஏற்றப்படுகின்றன...
+</div>
+<hr>
+</div>
+
+</section>
+
+<footer>
+<h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
+<p>தே.புடையூர்</p>
+<p>நம்பிக்கை • தரம் • விலை குறைவு</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://ltugxepaeytnhjohoirq.supabase.co';
+const SUPABASE_KEY='sb_publishable_OQtJL5E7Bn2tSugNiLaN_A_z13-Iko5';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const categories=[
+'மாவு வகைகள்','பருப்பு வகைகள்','எண்ணெய் வகைகள்','மசாலா பொடிகள்',
+'மளிகை சாமான்கள்','பிஸ்கட் & ஸ்நாக்ஸ்','சோப்பு & ஷாம்பு',
+'பூஜைப் பொருட்கள்','சாக்லேட் & இனிப்புகள்','பற்பசை & பிரஷ்',
+'சலவைப் பொருட்கள்','குளிர்பானங்கள்','பால் & தயிர்','அரிசி வகைகள்',
+'குழந்தைகள் பொருட்கள்','மற்ற பொருட்கள்',
+'செல்போன் மற்றும் உதிரிப்பாகங்கள்','வீட்டு உபயோகப் பொருட்கள்'
+];
+
+let products=[];
+let editingId=null;
+
+const $=id=>document.getElementById(id);
+
+function esc(value){
+ return String(value??'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ })[c]);
+}
+
+function fillCategories(){
+ $('categoryFilter').innerHTML=
+ '<option value="">அனைத்து வகைகளும்</option>'+
+ categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+ $('pcategory').innerHTML=
+ categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+
+
+function renderProducts(){
+ const category=$('categoryFilter').value;
+ const list=products.filter(p=>!category||p.category===category);
+
+ const photos = {};
+
+ $('productsGrid').innerHTML=list.map(p=>`
+ <div class="item">
+  <img
+   src="${esc(p.image_url || '')}"
+   alt="${esc(p.name)}"
+   style="width:100%;height:140px;object-fit:contain;border-radius:8px"
+   onerror="this.style.display='none'"
+  >
+  <div class="pic">${esc(p.emoji||'🛒')}</div>
+  <h3>${esc(p.name)}</h3>
+  <p class="small">${esc(p.category||'')}</p>
+  <div class="price">₹${Number(p.price||0).toFixed(2)} / ${esc(p.unit||'பாக்கெட்')}</div>
+  <p class="small">${Number(p.stock_qty||0)>0?'இருப்பு: '+Number(p.stock_qty):'இருப்பு இல்லை'}</p>
+  <button onclick="chooseProduct('${esc(p.id)}')">ஆர்டர் செய்ய</button>
+ </div>`).join('');
+}
+
+
+
+
+function chooseProduct(id){
+ $('product').value=id;
+updateTotal();
+ $('order').scrollIntoView({behavior:'smooth'});
+}
+
+async function loadProducts(){
+ $('loadmsg').textContent='பொருட்கள் ஏற்றப்படுகின்றன...';
+ const {data,error}=await db.from('products')
+ .select('id,name,category,unit,price,stock_qty,emoji,is_active,image_url')
+ .eq('is_active',true).order('name');
+
+
+if(error){
+  $('loadmsg').textContent =
+    'பிழை: ' + error.message +
+    ' | Code: ' + (error.code || 'தெரியவில்லை');
+  console.error('Supabase products error:', error);
+  return;
+}
+
+
+ products=data||[];
+ $('loadmsg').textContent=products.length?
+ 'பொருட்கள் பட்டியல்': 'இன்னும் பொருட்கள் சேர்க்கப்படவில்லை.';
+
+ renderProducts();
+
+ $('product').innerHTML=products.map(p=>
+ `<option value="${esc(p.id)}">${esc(p.name)} — ₹${Number(p.price||0).toFixed(2)}</option>`
+ ).join('')+'<option value="other">மற்ற பொருள்</option>';
+updateTotal();
+ $('editProduct').innerHTML='<option value="">புதிய பொருள் சேர்க்க</option>'+
+ products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+}
+
+async function login(){
+ const email=$('ownerEmail').value.trim();
+ const password=$('ownerPassword').value;
+ $('loginMsg').textContent='உள்நுழைகிறது...';
+
+ const {error}=await db.auth.signInWithPassword({email,password});
+ if(error){
+  $('loginMsg').textContent='உள்நுழைய முடியவில்லை. மின்னஞ்சல் மற்றும் கடவுச்சொல்லைச் சரிபார்க்கவும்.';
+  return;
+ }
+
+ $('loginPanel').classList.add('hidden');
+ $('adminPanel').classList.remove('hidden');
+ $('ownerPassword').value='';
+ $('adminMsg').textContent='உள்நுழைந்துவிட்டீர்கள்.';
+ await loadProducts();
+ await loadOrders();
+}
+
+function selectProduct(){
+ const p=products.find(x=>String(x.id)===$('editProduct').value);
+ if(!p){clearForm();return;}
+ editingId=p.id;
+ $('pname').value=p.name||'';
+ $('pcategory').value=p.category||categories[0];
+ $('pprice').value=p.price??'';
+ $('pemoji').value=p.emoji||'🛒';
+ $('punit').value=p.unit||'பாக்கெட்';
+ $('pstock').value=p.stock_qty??0;
+ $('pimage').value=p.image_url||'';
+ $('pactive').checked=!!p.is_active;
+}
+
+function clearForm(){
+ editingId=null;
+ $('editProduct').value='';
+ $('pname').value='';
+ $('pcategory').value=categories[0];
+ $('punit').value='பாக்கெட்';
+ $('pprice').value='';
+ $('pstock').value='0';
+ $('pemoji').value='🛒';
+ $('pimage').value='';
+ $('pactive').checked=true;
+}
+
+async function saveProduct(){
+
+ const name=$
