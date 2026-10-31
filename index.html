@@ -78,6 +78,21 @@ footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:
 <p id="loadmsg" class="small">பொருட்கள் ஏற்றப்படுகின்றன...</p>
 <div id="productsGrid" class="grid"></div>
 </section>
+<section id="myOrders">
+  <h2>📦 என் ஆர்டர்கள் (My Orders)</h2>
+  <div class="panel">
+    <label>ஆர்டர் குறியீடு</label>
+    <input id="myOrderCode" type="text"
+      placeholder="உங்கள் ஆர்டர் குறியீடு">
+
+    <label>ஆர்டர் செய்த மொபைல் எண்</label>
+    <input id="myOrderPhone" type="tel"
+      maxlength="10" placeholder="10 இலக்க மொபைல் எண்">
+
+    <button onclick="findMyOrder()">ஆர்டரைப் பார்க்க</button>
+    <div id="myOrderResult" style="margin-top:15px"></div>
+  </div>
+</section>
 
 <section id="order">
 <h2>📲 WhatsApp மூலம் ஆர்டர்</h2>
