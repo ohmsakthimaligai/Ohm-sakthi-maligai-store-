@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ஓம் சக்தி மளிகை ஸ்டோர் | தே.புடையூர்</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Tamil",sans-serif;background:#fff8e8;color:#29251d}
+header{background:#14532d;color:white;text-align:center;padding:22px 12px}
+header h1{font-size:25px;margin:10px 0}
+nav{background:#facc15;padding:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+nav a{color:#422006;text-decoration:none;font-weight:bold}
+section{padding:18px 14px;max-width:1000px;margin:auto}
+h2{color:#166534}
+.hero,.item,.panel{background:white;border-radius:12px;padding:15px;margin:12px 0;box-shadow:0 2px 8px #ddd}
+.hero{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{text-align:center;margin:0;padding:14px 8px}
+.pic{font-size:34px}
+.price{color:#166534;font-weight:bold}
+button,.btn{display:block;width:100%;border:0;border-radius:8px;padding:12px;margin-top:10px;background:#16803c;color:white;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+.gold{background:#d97706}
+.danger{background:#b91c1c}
+input,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+input[type="radio"],input[type="checkbox"]{width:auto;margin:8px}
+.small{font-size:13px;color:#655f52}
+footer{background:#14532d;color:white;text-align:center;padding:22px;margin-top:20px}
+.hidden{display:none}
+.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-bottom:1px solid #eee;padding:10px 0}
+.cart-actions{display:flex;align-items:center;gap:6px}
+.cart-actions button{width:auto;margin:0;padding:8px 12px}
+.cart-total{font-size:18px;font-weight:bold;color:#166534}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+<h1>🛒 ஓம் சக்தி மளிகை ஸ்டோர்</h1>
+<p>📍 தே.புடையூர்</p>
+<p><b>நம்பிக்கை • தரம் • விலை குறைவு</b></p>
+</header>
+
+<section class="panel">
+  <h3>🚚 டெலிவரி வசதி</h3>
+  <label><input type="radio" name="delivery" value="pickup" checked> 🏪 கடையில் வாங்குதல்</label>
+  <br><br>
+  <label><input type="radio" name="delivery" value="home"> 🏠 வீட்டிற்கு டெலிவரி</label>
+  <p>📍 2 கி.மீ. வரை இலவச டெலிவரி</p>
+  <p>2 கி.மீ.க்கு மேல் ஒவ்வொரு கூடுதல் கி.மீ.க்கும் ₹10</p>
+</section>
+
+<nav>
+<a href="#products">பொருட்கள்</a>
+<a href="#order">ஆர்டர் / Cart</a>
+<a href="#myOrders">என் ஆர்டர்கள்</a>
+<a href="#contact">தொடர்பு</a>
+<a href="#owner">கடை நிர்வாகம்</a>
+</nav>
+
+<section class="hero">
+<h2>🙏 அன்புடன் வரவேற்கிறோம்!</h2>
+<p>மளிகைப் பொருட்கள் மற்றும் அன்றாடத் தேவைகளை இங்கே பாருங்கள்.</p>
+<a class="btn" href="#products">பொருட்களைப் பார்க்க</a>
+</section>
+
+<section id="products">
+<h2>🛍️ எங்கள் பொருட்கள்</h2>
+<label for="categoryFilter">பொருள் வகையைத் தேர்ந்தெடுக்கவும்</label>
+<select id="categoryFilter" onchange="renderProducts()"><option value="">அனைத்து வகைகளும்</option></select>
+<p id="loadmsg" class="small">பொருட்கள் ஏற்றப்படுகின்றன...</p>
+<div id="productsGrid" class="grid"></div>
+</section>
+
+<section id="order">
+<h2>🛒 உங்கள் Cart</h2>
+<div class="panel">
+  <p class="small">பொருட்கள் பகுதியில் உள்ள “Cart-ல் சேர்க்க” பொத்தானை அழுத்தி பல பொருட்களைச் சேர்க்கலாம்.</p>
+  <div id="cartList">Cart காலியாக உள்ளது.</div>
+  <p class="cart-total" id="cartSubtotal">மொத்தம்: ₹0</p>
+</div>
+
+<div class="panel">
+  <h3>வாடிக்கையாளர் விவரங்கள்</h3>
+  <label>உங்கள் பெயர்</label>
+  <input id="customerName" type="text" placeholder="பெயரை உள்ளிடவும்">
+  <label>மொபைல் எண்</label>
+  <input id="customerPhone" type="tel" maxlength="10" placeholder="10 இலக்க மொபைல் எண்">
+  <div id="addressBox" class="hidden">
+    <label>வீட்டு முகவரி</label>
+    <input id="customerAddress" type="text" placeholder="வீட்டு முகவரியை உள்ளிடவும்">
+    <button type="button" class="gold" onclick="getCustomerLocation()">📍 எனது இருப்பிடத்தைப் பெற</button>
+    <p id="locationMsg" class="small"></p>
+  </div>
+  <label>WhatsApp ஆர்டர் எண்</label>
+  <select id="whatsappNumber">
+    <option value="9626665623">9626665623</option>
+    <option value="9787750266">9787750266</option>
+  </select>
+  <button type="button" onclick="placeOrder()">ஆர்டர் செய்யவும்</button>
+  <p id="orderMsg" class="small"></p>
+</div>
+</section>
+<section id="myOrders">
+  <h2>📦 என் ஆர்டர்கள்</h2>
+  <div class="panel">
+    <label>ஆர்டர் எண்</label>
+    <input id="searchOrderCode" type="text" placeholder="ஆர்டர் எண்ணை உள்ளிடவும்">
+    <label>மொபைல் எண்</label>
+    <input id="searchOrderPhone" type="tel" maxlength="10" placeholder="மொபைல் எண்ணை உள்ளிடவும்">
+    <button type="button" onclick="findMyOrder()">ஆர்டர் நிலையைப் பார்க்க</button>
+    <div id="myOrderResult"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>📞 எங்களைத் தொடர்புகொள்ள</h2>
+  <div class="panel">
+    <p><b>ஓம் சக்தி மளிகை ஸ்டோர்</b></p>
+    <p>📍 தே.புடையூர்</p>
+    <p>📱 9626665623</p>
+    <p>📱 9787750266</p>
+    <a class="btn" href="https://maps.app.goo.gl/Tzis9bkDn8UWtnd68?g_st=ac" target="_blank">Google Maps-ல் வழியைப் பார்க்க</a>
+  </div>
+</section>
+
+<section id="owner">
+  <h2>🔐 கடை நிர்வாகம்</h2>
+  <div class="panel">
+    <label>நிர்வாகி மின்னஞ்சல்</label>
+    <input id="adminEmail" type="email" placeholder="மின்னஞ்சல்">
+    <label>கடவுச்சொல்</label>
+    <input id="adminPassword" type="password" placeholder="கடவுச்சொல்">
+    <button type="button" onclick="adminLogin()">நிர்வாகி உள்நுழைவு</button>
+    <button type="button" class="danger hidden" id="adminLogout" onclick="adminLogout()">வெளியேறு</button>
+    <p id="adminMsg" class="small"></p>
+  </div>
+
+  <div id="adminPanel" class="hidden">
+    <div class="panel">
+      <h3>➕ புதிய பொருள் சேர்க்க / மாற்ற</h3>
+      <input id="editProductId" type="hidden">
+      <label>பொருள் பெயர்</label>
+      <input id="productName" type="text" placeholder="பொருள் பெயர்">
+      <label>பொருள் வகை</label>
+      <select id="productCategory"></select>
+      <label>அலகு</label>
+      <input id="productUnit" type="text" placeholder="எ.கா. கிலோ / பாக்கெட்">
+      <label>விலை (₹)</label>
+      <input id="productPrice" type="number" min="0" step="0.01" placeholder="விலை">
+      <label>இருப்பு எண்ணிக்கை</label>
+      <input id="productStock" type="number" min="0" step="1" placeholder="இருப்பு">
+      <label>படம் URL (விருப்பம்)</label>
+      <input id="productImage" type="url" placeholder="படத்தின் இணைய முகவரி">
+      <label>Emoji</label>
+      <input id="productEmoji" type="text" placeholder="எ.கா. 🛒">
+      <button type="button" onclick="saveProduct()">சேமிக்கவும்</button>
+      <button type="button" class="gold" onclick="clearProductForm()">புதிய பொருள்</button>
+    </div>
+
+    <div class="panel">
+      <h3>📋 ஆர்டர்கள் நிர்வாகம்</h3>
+      <button type="button" onclick="loadOrders()">ஆர்டர்களைப் புதுப்பிக்க</button>
+      <div id="adminOrders"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
+  <p>நம்பிக்கை • தரம் • விலை குறைவு</p>
+  <p>📍 தே.புடையூர்</p>
+</footer>
+
+<script>
+"use strict";
+
+// Supabase இணைப்பு விவரங்கள்
+const SUPABASE_URL = "https://ltugxepaeytnhjohoirq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_OQtJL5E7Bn2tSugNiLaN_A_z13-Iko5";
+
+// கடை விவரங்கள்
+const STORE_LAT = 11.504087;
+const STORE_LNG = 79.201432;
+
+const CATEGORIES = [
+  "மாவு வகைகள்",
+  "பருப்பு வகைகள்",
+  "எண்ணெய் வகைகள்",
+  "மசாலா பொடிகள்",
+  "மளிகை சாமான்கள்",
+  "பிஸ்கட் & ஸ்நாக்ஸ்",
+  "சோப்பு & ஷாம்பு",
+  "பூஜைப் பொருட்கள்",
+  "சாக்லேட் & இனிப்புகள்",
+  "பற்பசை & பிரஷ்",
+  "சலவைப் பொருட்கள்",
+  "குளிர்பானங்கள்",
+  "பால் & தயிர்",
+  "அரிசி வகைகள்",
+  "குழந்தைகள் பொருட்கள்",
+  "மற்ற பொருட்கள்",
+  "செல்போன் மற்றும் உதிரிப்பாகங்கள்",
+  "வீட்டு உபயோகப் பொருட்கள்"
+];
+
+let supabaseClient = null;
+let products = [];
+let cart = [];
+let customerCoords = null;
+let adminSession = null;
+
+function money(value) {
+  return "₹" + Number(value || 0).toFixed(2);
+}
+
+function showMessage(id, message) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = message;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function fillCategoryLists() {
+  const filter = document.getElementById("categoryFilter");
+  const adminCategory = document.getElementById("productCategory");
+
+  CATEGORIES.forEach(category => {
+    filter.add(new Option(category, category));
+    adminCategory.add(new Option(category, category));
+  });
+}
+
+function getSelectedDelivery() {
+  return document.querySelector('input[name="delivery"]:checked')?.value || "pickup";
+}
+
+document.querySelectorAll('input[name="delivery"]').forEach(input => {
+  input.addEventListener("change", () => {
+    const isHome = getSelectedDelivery() === "home";
+    document.getElementById("addressBox").classList.toggle("hidden", !isHome);
+    if (!isHome) customerCoords = null;
+  });
+});
+// Supabase REST API உதவிச் செயல்பாடுகள்
+async function api(path, options = {}) {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${adminSession?.access_token || SUPABASE_KEY}`,
+      "Content-Type": "application/json",
+      "Prefer": options.prefer || "return=representation",
+      ...(options.headers || {})
+    }
+  });
+
+  const text = await response.text();
+  let data = null;
+
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text;
+  }
+
+  if (!response.ok) {
+    throw new Error(data?.message || data?.hint || `சேவையகப் பிழை: ${response.status}`);
+  }
+
+  return data;
+}
+
+// பொருட்களைப் பெறுதல்
+async function loadProducts() {
+  showMessage("loadmsg", "பொருட்கள் ஏற்றப்படுகின்றன...");
+
+  try {
+    products = await api(
+      "products?select=id,name,category,unit,price,stock_qty,emoji,is_active,image_url&is_active=eq.true&order=name.asc"
+    );
+
+    renderProducts();
+    showMessage("loadmsg", products.length ? "" : "இப்போது பொருட்கள் இல்லை.");
+  } catch (error) {
+    showMessage("loadmsg", "பொருட்களை ஏற்ற முடியவில்லை. Supabase அட்டவணை மற்றும் அனுமதிகளைச் சரிபார்க்கவும்.");
+    console.error(error);
+  }
+}
+
+// பொருட்களைக் காட்டுதல்
+function renderProducts() {
+  const grid = document.getElementById("productsGrid");
+  const selectedCategory = document.getElementById("categoryFilter").value;
+
+  const filtered = products.filter(product =>
+    !selectedCategory || product.category === selectedCategory
+  );
+
+  if (!filtered.length) {
+    grid.innerHTML = "<p>பொருட்கள் இல்லை.</p>";
+    return;
+  }
+
+  grid.innerHTML = filtered.map(product => {
+    const stock = Number(product.stock_qty || 0);
+    const image = product.image_url
+      ? `<img src="${escapeHTML(product.image_url)}" alt="" style="width:75px;height:75px;object-fit:contain">`
+      : `<div class="pic">${escapeHTML(product.emoji || "🛒")}</div>`;
+
+    return `
+      <article class="item">
+        ${image}
+        <h3>${escapeHTML(product.name)}</h3>
+        <p>${escapeHTML(product.category || "")}</p>
+        <p class="price">${money(product.price)} / ${escapeHTML(product.unit || "எண்ணிக்கை")}</p>
+        <p class="small">இருப்பு: ${stock}</p>
+        <button type="button"
+          onclick="addToCart('${product.id}')"
+          ${stock < 1 ? "disabled" : ""}>
+          ${stock < 1 ? "இருப்பு இல்லை" : "Cart-ல் சேர்க்க"}
+        </button>
+      </article>
+    `;
+  }).join("");
+}
+
+// Cart செயல்பாடுகள்
+function addToCart(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === id);
+  const currentQty = existing ? existing.quantity : 0;
+
+  if (currentQty + 1 > Number(product.stock_qty || 0)) {
+    alert("போதுமான இருப்பு இல்லை.");
+    return;
+  }
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      unit: product.unit || "எண்ணிக்கை",
+      price: Number(product.price),
+      quantity: 1
+    });
+  }
+
+  renderCart();
+}
+
+function changeCartQty(id, change) {
+  const item = cart.find(row => row.id === id);
+  const product = products.find(row => row.id === id);
+  if (!item || !product) return;
+
+  const newQty = item.quantity + change;
+
+  if (newQty < 1) {
+    cart = cart.filter(row => row.id !== id);
+  } else if (newQty <= Number(product.stock_qty || 0)) {
+    item.quantity = newQty;
+  } else {
+    alert("இருப்பில் உள்ள எண்ணிக்கையை விட அதிகமாகச் சேர்க்க முடியாது.");
+  }
+
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  renderCart();
+}
+
+function clearCart() {
+  cart = [];
+  renderCart();
+}
+
+function getSubtotal() {
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+function renderCart() {
+  const list = document.getElementById("cartList");
+
+  if (!cart.length) {
+    list.textContent = "Cart காலியாக உள்ளது.";
+  } else {
+    list.innerHTML = cart.map(item => `
+      <div class="cart-row">
+        <div>
+          <b>${escapeHTML(item.name)}</b>
+          <div class="small">${money(item.price)} × ${item.quantity} ${escapeHTML(item.unit)}</div>
+          <b>${money(item.price * item.quantity)}</b>
+        </div>
+        <div class="cart-actions">
+          <button type="button" onclick="changeCartQty('${item.id}',-1)">−</button>
+          <b>${item.quantity}</b>
+          <button type="button" onclick="changeCartQty('${item.id}',1)">+</button>
+          <button type="button" class="danger" onclick="removeFromCart('${item.id}')">×</button>
+        </div>
+      </div>
+    `).join("");
+
+    list.innerHTML += `<button type="button" class="danger" onclick="clearCart()">Cart முழுவதையும் நீக்க</button>`;
+  }
+
+  document.getElementById("cartSubtotal").textContent =
+    "பொருட்கள் மொத்தம்: " + money(getSubtotal());
+}
+
+// இருப்பிடத்தையும் தூரத்தையும் கணக்கிடுதல்
+function getCustomerLocation() {
+  if (!navigator.geolocation) {
+    showMessage("locationMsg", "உங்கள் மொபைலில் இருப்பிட வசதி இல்லை.");
+    return;
+  }
+
+  showMessage("locationMsg", "இருப்பிடம் பெறப்படுகிறது...");
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      customerCoords = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      showMessage("locationMsg", "இருப்பிடம் பெறப்பட்டது.");
+    },
+    error => {
+      showMessage("locationMsg", "இருப்பிட அனுமதியைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.");
+    },
+    { enableHighAccuracy: true, timeout: 15000 }
+  );
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const rad = degrees => degrees * Math.PI / 180;
+  const dLat = rad(lat2 - lat1);
+  const dLon = rad(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+
+  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function getDeliveryDetails() {
+  if (getSelectedDelivery() === "pickup") {
+    return { type: "pickup", distance: 0, fee: 0 };
+  }
+
+  if (!customerCoords) {
+    throw new Error("முதலில் உங்கள் இருப்பிடத்தைப் பெறவும்.");
+  }
+
+  const distance = calculateDistance(
+    STORE_LAT, STORE_LNG,
+    customerCoords.lat, customerCoords.lng
+  );
+
+  const fee = distance <= 2 ? 0 : Math.ceil(distance - 2) * 10;
+
+  return {
+    type: "delivery",
+    distance: Number(distance.toFixed(2)),
+    fee
+  };
+}
+
+// பல பொருட்களுக்கான ஆர்டர்
+async function placeOrder() {
+  if (!cart.length) {
+    alert("முதலில் Cart-ல் பொருட்களைச் சேர்க்கவும்.");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const whatsapp = document.getElementById("whatsappNumber").value;
+
+  if (!name) {
+    alert("உங்கள் பெயரை உள்ளிடவும்.");
+    return;
+  }
+
+  if (!/^[6-9][0-9]{9}$/.test(phone)) {
+    alert("சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.");
+    return;
+  }
+
+  let delivery;
+
+  try {
+    delivery = getDeliveryDetails();
+  } catch (error) {
+    alert(error.message);
+    return;
+  }
+
+  if (delivery.type === "delivery" && !address) {
+    alert("வீட்டு முகவரியை உள்ளிடவும்.");
+    return;
+  }
+
+  const subtotal = getSubtotal();
+  const total = subtotal + delivery.fee;
+  const orderCode = "OS" + Date.now().toString().slice(-9);
+
+  const button = document.querySelector('#order button[onclick="placeOrder()"]');
+  button.disabled = true;
+  showMessage("orderMsg", "ஆர்டர் பதிவு செய்யப்படுகிறது...");
+
+  try {
+    const result = await fetch(
+      `${SUPABASE_URL}/rest/v1/rpc/place_multi_item_order`,
+      {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          p_order_code: orderCode,
+          p_customer_name: name,
+          p_phone: phone,
+          p_product_ids: cart.map(item => item.id),
+          p_quantities: cart.map(item => item.quantity),
+          p_delivery_type: delivery.type,
+          p_distance_km: delivery.distance,
+          p_delivery_fee: delivery.fee,
+          p_customer_location: delivery.type === "delivery"
+            ? `${address} | ${customerCoords.lat},${customerCoords.lng}`
+            : "கடையில் வாங்குதல்"
+        })
+      }
+    );
+
+    const responseText = await result.text();
+    if (!result.ok) throw new Error(responseText || "ஆர்டர் பதிவு தோல்வியடைந்தது.");
+
+    const lines = cart.map(item =>
+      `${item.name} × ${item.quantity} = ${money(item.price * item.quantity)}`
+    ).join("\n");
+
+    const message =
+`வணக்கம்! ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.
+
+ஆர்டர் எண்: ${orderCode}
+பெயர்: ${name}
+மொபைல்: ${phone}
+
+${lines}
+
+பொருட்கள் மொத்தம்: ${money(subtotal)}
+டெலிவரி கட்டணம்: ${money(delivery.fee)}
+மொத்தம்: ${money(total)}
+வாங்கும் முறை: ${delivery.type === "pickup" ? "கடையில் வாங்குதல்" : "வீட்டு டெலிவரி"}
+${delivery.type === "delivery" ? "முகவரி: " + address + "\nதூரம்: " + delivery.distance + " கி.மீ." : ""}`;
+
+    cart = [];
+    renderCart();
+    await loadProducts();
+
+    showMessage("orderMsg", "ஆர்டர் பதிவு செய்யப்பட்டது. WhatsApp-ல் Send அழுத்தவும்.");
+
+    window.open(
+      `https://wa.me/91${whatsapp}?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
+  } catch (error) {
+    console.error(error);
+    showMessage("orderMsg", "ஆர்டர் பதிவு செய்ய முடியவில்லை. " + error.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+// வாடிக்கையாளர் ஆர்டர் நிலையைப் பார்ப்பது
+async function findMyOrder() {
+  const code = document.getElementById("searchOrderCode").value.trim();
+  const phone = document.getElementById("searchOrderPhone").value.trim();
+  const resultBox = document.getElementById("myOrderResult");
+
+  if (!code || !/^[6-9][0-9]{9}$/.test(phone)) {
+    resultBox.textContent = "சரியான ஆர்டர் எண்ணையும் மொபைல் எண்ணையும் உள்ளிடவும்.";
+    return;
+  }
+
+  resultBox.textContent = "ஆர்டர் தேடப்படுகிறது...";
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/rpc/get_my_order`,
+      {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          p_order_code: code,
+          p_phone: phone
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error("ஆர்டரைப் பெற முடியவில்லை.");
+
+    const order = Array.isArray(data) ? data[0] : data;
+
+    if (!order) {
+      resultBox.textContent = "இந்த விவரங்களில் ஆர்டர் கிடைக்கவில்லை.";
+      return;
+    }
+
+    resultBox.innerHTML = `
+      <div class="panel">
+        <p><b>ஆர்டர் எண்:</b> ${escapeHTML(order.order_code || code)}</p>
+        <p><b>பொருட்கள்:</b> ${escapeHTML(order.product_name || "")}</p>
+        <p><b>எண்ணிக்கை:</b> ${escapeHTML(order.quantity || "")}</p>
+        <p><b>மொத்தம்:</b> ${money(order.total_amount)}</p>
+        <p><b>வாங்கும் முறை:</b> ${escapeHTML(order.order_type || "")}</p>
+        <p><b>ஆர்டர் நிலை:</b> ${escapeHTML(order.status || "")}</p>
+        <p><b>தேதி:</b> ${escapeHTML(order.created_at || "")}</p>
+      </div>
+    `;
+  } catch (error) {
+    resultBox.textContent = error.message;
+  }
+}
+
+// நிர்வாகி உள்நுழைவு
+async function adminLogin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  showMessage("adminMsg", "உள்நுழைகிறது...");
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+      {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.msg || data.message || "உள்நுழைய முடியவில்லை.");
+
+    if (email.toLowerCase() !== "j.ajithkumar3@gmail.com") {
+      throw new Error("இந்த மின்னஞ்சலுக்கு நிர்வாக அனுமதி இல்லை.");
+    }
+
+    adminSession = data;
+    document.getElementById("adminPanel").classList.remove("hidden");
+    document.getElementById("adminLogout").classList.remove("hidden");
+    showMessage("adminMsg", "நிர்வாகியாக உள்நுழைந்துள்ளீர்கள்.");
+
+    await loadOrders();
+  } catch (error) {
+    showMessage("adminMsg", error.message);
+  }
+}
+
+function adminLogout() {
+  adminSession = null;
+  document.getElementById("adminPanel").classList.add("hidden");
+  document.getElementById("adminLogout").classList.add("hidden");
+  showMessage("adminMsg", "வெளியேறிவிட்டீர்கள்.");
+}
+
+// பொருள் படிவத்தை காலி செய்தல்
+function clearProductForm() {
+  document.getElementById("editProductId").value = "";
+  document.getElementById("productName").value = "";
+  document.getElementById("productUnit").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("productStock").value = "";
+  document.getElementById("productImage").value = "";
+  document.getElementById("productEmoji").value = "";
+}
+
+// பொருள் சேமித்தல் / மாற்றுதல்
+async function saveProduct() {
+  if (!adminSession) {
+    alert("முதலில் நிர்வாகியாக உள்நுழையவும்.");
+    return;
+  }
+
+  const id = document.getElementById("editProductId").value;
+  const name = document.getElementById("productName").value.trim();
+  const category = document.getElementById("productCategory").value;
+  const unit = document.getElementById("productUnit").value.trim();
+  const price = Number(document.getElementById("productPrice").value);
+  const stock = Number(document.getElementById("productStock").value);
+  const image = document.getElementById("productImage").value.trim();
+  const emoji = document.getElementById("productEmoji").value.trim();
+
+  if (!name || !unit || !Number.isFinite(price) || price < 0 ||
+      !Number.isInteger(stock) || stock < 0) {
+    alert("பொருள் விவரங்களைச் சரியாக உள்ளிடவும்.");
+    return;
+  }
+
+  const product = {
+    name,
+    category,
+    unit,
+    price,
+    stock_qty: stock,
+    image_url: image || null,
+    emoji: emoji || "🛒",
+    is_active: true
+  };
+
+  try {
+    if (id) {
+      await api(`products?id=eq.${encodeURIComponent(id)}`, {
+        method: "PATCH",
+        body: JSON.stringify(product)
+      });
+      alert("பொருள் மாற்றப்பட்டது.");
+    } else {
+      await api("products", {
+        method: "POST",
+        body: JSON.stringify(product)
+      });
+      alert("புதிய பொருள் சேர்க்கப்பட்டது.");
+    }
+
+    clearProductForm();
+    await loadProducts();
+  } catch (error) {
+    alert("சேமிக்க முடியவில்லை: " + error.message);
+  }
+}
+
+// பொருளை மாற்றுவதற்காக படிவத்தில் ஏற்றுதல்
+function editProduct(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  document.getElementById("editProductId").value = product.id;
+  document.getElementById("productName").value = product.name || "";
+  document.getElementById("productCategory").value = product.category || "";
+  document.getElementById("productUnit").value = product.unit || "";
+  document.getElementById("productPrice").value = product.price || 0;
+  document.getElementById("productStock").value = product.stock_qty || 0;
+  document.getElementById("productImage").value = product.image_url || "";
+  document.getElementById("productEmoji").value = product.emoji || "🛒";
+
+  document.getElementById("owner").scrollIntoView({ behavior: "smooth" });
+}
+
+// நிர்வாகி ஆர்டர் பட்டியல்
+async function loadOrders() {
+  if (!adminSession) return;
+
+  const box = document.getElementById("adminOrders");
+  box.textContent = "ஆர்டர்கள் ஏற்றப்படுகின்றன...";
+
+  try {
+    const orders = await api(
+      "orders?select=id,order_code,customer_name,phone,product_name,quantity,total_amount,status,created_at&order=created_at.desc&limit=100"
+    );
+
+    if (!orders.length) {
+      box.textContent = "ஆர்டர்கள் இல்லை.";
+      return;
+    }
+
+    box.innerHTML = orders.map(order => `
+      <div class="panel">
+        <b>ஆர்டர்: ${escapeHTML(order.order_code || order.id)}</b>
+        <p>பெயர்: ${escapeHTML(order.customer_name)}</p>
+        <p>மொபைல்: ${escapeHTML(order.phone)}</p>
+        <p>பொருட்கள்: ${escapeHTML(order.product_name || "")}</p>
+        <p>எண்ணிக்கை: ${escapeHTML(order.quantity || "")}</p>
+        <p>மொத்தம்: ${money(order.total_amount)}</p>
+        <p>நிலை: ${escapeHTML(order.status)}</p>
+        <select id="status-${order.id}">
+          <option value="new" ${order.status === "new" ? "selected" : ""}>புதிய ஆர்டர்</option>
+          <option value="preparing" ${order.status === "preparing" ? "selected" : ""}>தயாராகிறது</option>
+          <option value="out_for_delivery" ${order.status === "out_for_delivery" ? "selected" : ""}>டெலிவரிக்கு புறப்பட்டது</option>
+          <option value="delivered" ${order.status === "delivered" ? "selected" : ""}>வழங்கப்பட்டது</option>
+          <option value="cancelled" ${order.status === "cancelled" ? "selected" : ""}>ரத்து செய்யப்பட்டது</option>
+        </select>
+        <button type="button" onclick="updateOrderStatus('${order.id}')">நிலையைப் புதுப்பிக்க</button>
+      </div>
+    `).join("");
+  } catch (error) {
+    box.textContent = "ஆர்டர்களைப் பெற முடியவில்லை: " + error.message;
+  }
+}
+
+// ஆர்டர் நிலையை மாற்றுதல்
+async function updateOrderStatus(id) {
+  if (!adminSession) return;
+
+  const status = document.getElementById(`status-${id}`).value;
+
+  try {
+    await api(`orders?id=eq.${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ status })
+    });
+
+    alert("ஆர்டர் நிலை மாற்றப்பட்டது.");
+    await loadOrders();
+  } catch (error) {
+    alert("நிலையை மாற்ற முடியவில்லை: " + error.message);
+  }
+}
+
+// பக்கம் திறக்கும்போது
+fillCategoryLists();
+renderCart();
+loadProducts();
+</script>
+</body>
+</html>
