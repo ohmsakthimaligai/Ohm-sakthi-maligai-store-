@@ -342,6 +342,7 @@ async function saveProduct(){
  $('adminMsg').textContent='பொருள் சேமிக்கப்பட்டது.';
  clearForm();
  await loadProducts();
+ await loadOrders();
 }
 async function loadOrders(){
   const box = $('ordersList');
