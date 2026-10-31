@@ -145,6 +145,12 @@ placeholder="10 இலக்க மொபைல் எண்">
 <button onclick="logout()">வெளியேறவும்</button>
 <p id="adminMsg" class="small"></p>
 </div>
+<hr>
+<h3>📦 வாடிக்கையாளர் ஆர்டர்கள்</h3>
+<button onclick="loadOrders()">🔄 ஆர்டர்களைப் புதுப்பிக்க</button>
+<div id="ordersList">
+  ஆர்டர்கள் ஏற்றப்படுகின்றன...
+</div>
 </section>
 
 <footer>
@@ -335,7 +341,37 @@ async function saveProduct(){
  clearForm();
  await loadProducts();
 }
+async function loadOrders(){
+  const box = $('ordersList');
+  box.textContent = 'ஆர்டர்கள் ஏற்றப்படுகின்றன...';
 
+  const {data,error} = await db.from('orders')
+    .select('*')
+    .order('created_at',{ascending:false});
+
+  if(error){
+    box.textContent = 'பிழை: ' + error.message;
+    return;
+  }
+
+  if(!data || data.length === 0){
+    box.textContent = 'இன்னும் ஆர்டர்கள் இல்லை.';
+    return;
+  }
+
+  box.innerHTML = data.map(o => `
+    <div class="item" style="text-align:left;margin:10px 0">
+      <h3>🛒 ${esc(o.product_name || 'பொருள்')}</h3>
+      <p>வாடிக்கையாளர்: ${esc(o.customer_name || '')}</p>
+      <p>மொபைல்: ${esc(o.customer_phone || o.phone || '')}</p>
+      <p>எண்ணிக்கை: ${Number(o.quantity || 0)}</p>
+      <p>மொத்தம்: ₹${Number(o.total || o.total_amount || 0).toFixed(2)}</p>
+      <p>வாங்கும் முறை: ${esc(o.order_type || '')}</p>
+      <p>நிலை: ${esc(o.status || 'new')}</p>
+      <p class="small">${esc(o.created_at || '')}</p>
+    </div>
+  `).join('');
+}
 async function logout(){
  await db.auth.signOut();
  $('adminPanel').classList.add('hidden');
