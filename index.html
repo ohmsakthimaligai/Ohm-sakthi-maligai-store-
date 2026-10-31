@@ -274,6 +274,7 @@ async function login(){
  $('ownerPassword').value='';
  $('adminMsg').textContent='உள்நுழைந்துவிட்டீர்கள்.';
  await loadProducts();
+ await loadOrders();
 }
 
 function selectProduct(){
