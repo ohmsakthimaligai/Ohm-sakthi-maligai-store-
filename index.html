@@ -362,59 +362,8 @@ async function saveProduct(){
  await loadOrders();
 }
 async function loadOrders(){
-async function findMyOrder(){
-  const code = $('myOrderCode').value.trim().toUpperCase();
-  const phone = $('myOrderPhone').value.trim();
-  const box = $('myOrderResult');
 
-  if(!code || !/^[6-9]\d{9}$/.test(phone)){
-    box.textContent = 'சரியான ஆர்டர் குறியீடு மற்றும் மொபைல் எண்ணை உள்ளிடவும்.';
-    return;
-  }
-
-  box.textContent = 'ஆர்டர் தேடப்படுகிறது...';
-
-  const {data,error} = await db.rpc('get_my_order',{
-    p_order_code: code,
-    p_phone: phone
-  });
-
-  if(error){
-    box.textContent = 'பிழை: ' + error.message;
-    return;
-  }
-
-  if(!data || data.length === 0){
-    box.textContent = 'ஆர்டர் கிடைக்கவில்லை. குறியீடு மற்றும் மொபைல் எண்ணைச் சரிபார்க்கவும்.';
-    return;
-  }
-
-  const o = data[0];
-
-  const statusNames = {
-    new: 'ஆர்டர் பெறப்பட்டது',
-    preparing: 'தயாராகிறது',
-    out_for_delivery: 'டெலிவரிக்கு புறப்பட்டது',
-    delivered: 'டெலிவரி முடிந்தது',
-    cancelled: 'ஆர்டர் ரத்து செய்யப்பட்டது'
-  };
-
-  box.innerHTML = `
-    <div class="item" style="text-align:left;margin-top:12px">
-      <h3>🛒 ORDER DETAILS</h3>
-      <p><b>ஆர்டர் எண்:</b> ${esc(o.order_code)}</p>
-      <hr>
-      <h3>${esc(o.product_name || 'பொருள்')}</h3>
-      <p>எண்ணிக்கை: ${Number(o.quantity || 0)}</p>
-      <p>மொத்தம்: ₹${Number(o.total_amount || 0).toFixed(2)}</p>
-      <p>வாங்கும் முறை: ${esc(o.order_type || '')}</p>
-      <hr>
-      <h3>📦 ஆர்டர் நிலை</h3>
-      <p><b>${esc(statusNames[o.status] || o.status || 'ஆர்டர் பெறப்பட்டது')}</b></p>
-      <p class="small">தேதி: ${esc(o.created_at || '')}</p>
-    </div>
-  `;
-}
+ 
 
 async function loadOrders(){
   const box = $('ordersList');
