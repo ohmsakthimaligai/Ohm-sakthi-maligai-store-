@@ -986,47 +986,6 @@ function printReceipt() {
 // வாடிக்கையாளர் ஆர்டர் நிலையைப் பார்ப்பது
 async function findMyOrder() {
 
-// நிர்வாகி ரசீதைப் பார்க்க
-function showAdminReceipt(id) {
-  const order = window.adminOrdersCache?.[id];
-
-  if (!order) {
-    alert("ஆர்டர் விவரங்கள் கிடைக்கவில்லை. மீண்டும் ஆர்டர்களைப் புதுப்பிக்கவும்.");
-    return;
-  }
-
-  showReceipt({
-    code: order.order_code || order.id,
-    date: order.created_at
-      ? new Date(order.created_at).toLocaleString("ta-IN")
-      : "",
-    name: order.customer_name || "",
-    phone: order.phone || "",
-    items: [{
-      name: order.product_name || "ஆர்டர் பொருட்கள்",
-      quantity: order.quantity || 1,
-      price: Number(order.subtotal || order.total_amount || order.total || 0) /
-        Math.max(1, Number(order.quantity || 1))
-    }],
-    subtotal: order.subtotal ?? order.total_amount ?? order.total ?? 0,
-    fee: order.delivery_fee || 0,
-    total: order.total_amount ?? order.total ?? 0,
-    delivery: order.order_type === "pickup"
-      ? "கடையில் வாங்குதல்"
-      : "வீட்டு டெலிவரி",
-    address: order.address || ""
-  });
-}
-
-  const code = document.getElementById("searchOrderCode").value.trim();
-  const phone = document.getElementById("searchOrderPhone").value.trim();
-  const resultBox = document.getElementById("myOrderResult");
-
-  if (!code || !/^[6-9][0-9]{9}$/.test(phone)) {
-    resultBox.textContent = "சரியான ஆர்டர் எண்ணையும் மொபைல் எண்ணையும் உள்ளிடவும்.";
-    return;
-  }
-
   resultBox.textContent = "ஆர்டர் தேடப்படுகிறது...";
 
   try {
@@ -1072,7 +1031,37 @@ function showAdminReceipt(id) {
     resultBox.textContent = error.message;
   }
 }
+// நிர்வாகி ரசீதைப் பார்க்க
+function showAdminReceipt(id) {
+const order = window.adminOrdersCache?.[id];
 
+if (!order) {
+alert("ஆர்டர் விவரங்கள் கிடைக்கவில்லை. மீண்டும் ஆர்டர்களைப் புதுப்பிக்கவும்.");
+return;
+}
+
+showReceipt({
+code: order.order_code || order.id,
+date: order.created_at
+? new Date(order.created_at).toLocaleString("ta-IN")
+: "",
+name: order.customer_name || "",
+phone: order.phone || "",
+items: [{
+name: order.product_name || "ஆர்டர் பொருட்கள்",
+quantity: order.quantity || 1,
+price: Number(order.subtotal || order.total_amount || order.total || 0) /
+Math.max(1, Number(order.quantity || 1))
+}],
+subtotal: order.subtotal ?? order.total_amount ?? order.total ?? 0,
+fee: order.delivery_fee || 0,
+total: order.total_amount ?? order.total ?? 0,
+delivery: order.order_type === "pickup"
+? "கடையில் வாங்குதல்"
+: "வீட்டு டெலிவரி",
+address: order.address || ""
+});
+}
 // நிர்வாகி உள்நுழைவு
 async function adminLogin() {
   const email = document.getElementById("adminEmail").value.trim();
