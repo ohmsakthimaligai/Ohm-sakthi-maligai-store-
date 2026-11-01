@@ -567,7 +567,6 @@ async function loadProducts() {
     console.error(error);
   }
 }
-
 // பொருட்களைக் காட்டுதல்
 function renderProducts() {
   const grid = document.getElementById("productsGrid");
@@ -603,16 +602,22 @@ function renderProducts() {
         </button>
 
         ${adminSession ? `
-  <button type="button" class="gold"
-    onclick="editProduct('${product.id}')">
-    ✏️ திருத்தவும்
-  </button>
+          <button type="button" class="gold"
+            onclick="editProduct('${product.id}')">
+            ✏️ திருத்தவும்
+          </button>
 
-  <button type="button" class="danger"
-    onclick="deactivateProduct('${product.id}')">
-    🗑️ நீக்கு
-  </button>
-` : ""}
+          <button type="button" class="danger"
+            onclick="deactivateProduct('${product.id}')">
+            🗑️ நீக்கு
+          </button>
+        ` : ""}
+      </article>
+    `;
+  }).join("");
+}
+
+// Cart செயல்பாடுகள்
 
 // Cart செயல்பாடுகள்
 function addToCart(id) {
