@@ -585,7 +585,7 @@ function renderProducts() {
   grid.innerHTML = filtered.map(product => {
     const stock = Number(product.stock_qty || 0);
     const image = product.image_url
-      ? `<img src="${escapeHTML(product.image_url)}" alt="" style="width:75px;height:75px;object-fit:contain">`
+      ? `<img src="${escapeHTML(product.image_url)}" alt="">`
       : `<div class="pic">${escapeHTML(product.emoji || "🛒")}</div>`;
 
     return `
@@ -595,11 +595,19 @@ function renderProducts() {
         <p>${escapeHTML(product.category || "")}</p>
         <p class="price">${money(product.price)} / ${escapeHTML(product.unit || "எண்ணிக்கை")}</p>
         <p class="small">இருப்பு: ${stock}</p>
+
         <button type="button"
           onclick="addToCart('${product.id}')"
           ${stock < 1 ? "disabled" : ""}>
           ${stock < 1 ? "இருப்பு இல்லை" : "Cart-ல் சேர்க்க"}
         </button>
+
+        ${adminSession ? `
+          <button type="button" class="gold"
+            onclick="editProduct('${product.id}')">
+            ✏️ திருத்தவும்
+          </button>
+        ` : ""}
       </article>
     `;
   }).join("");
