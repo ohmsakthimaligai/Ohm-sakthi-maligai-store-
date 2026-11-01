@@ -939,6 +939,11 @@ async function adminLogin() {
   const email = document.getElementById("adminEmail").value.trim();
   const password = document.getElementById("adminPassword").value;
 
+  if (!email || !password) {
+    showMessage("adminMsg", "மின்னஞ்சல் மற்றும் கடவுச்சொல்லை உள்ளிடவும்.");
+    return;
+  }
+
   showMessage("adminMsg", "உள்நுழைகிறது...");
 
   try {
@@ -956,24 +961,30 @@ async function adminLogin() {
 
     const data = await response.json();
 
-    if (!response.ok) throw new Error(data.msg || data.message || "உள்நுழைய முடியவில்லை.");
+    if (!response.ok) {
+      throw new Error(
+        data.error_description || data.msg || data.message || data.error || "உள்நுழைய முடியவில்லை."
+      );
+    }
 
     if (email.toLowerCase() !== "j.ajithkumar3@gmail.com") {
       throw new Error("இந்த மின்னஞ்சலுக்கு நிர்வாக அனுமதி இல்லை.");
     }
 
     adminSession = data;
-    renderProducts();
     document.getElementById("adminPanel").classList.remove("hidden");
     document.getElementById("adminLogout").classList.remove("hidden");
+
     showMessage("adminMsg", "நிர்வாகியாக உள்நுழைந்துள்ளீர்கள்.");
 
+    renderProducts();
     await loadOrders();
+
   } catch (error) {
-    showMessage("adminMsg", error.message);
+    console.error("Login Error:", error);
+    showMessage("adminMsg", "பிழை: " + error.message);
   }
 }
-
 function adminLogout() {
   adminSession = null;
   renderProducts(); document.getElementById("adminPanel").classList.add("hidden");
