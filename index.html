@@ -970,7 +970,7 @@ async function adminLogin() {
 
 function adminLogout() {
   adminSession = null;
-  document.getElementById("adminPanel").classList.add("hidden");
+  renderProducts(); document.getElementById("adminPanel").classList.add("hidden");
   document.getElementById("adminLogout").classList.add("hidden");
   showMessage("adminMsg", "வெளியேறிவிட்டீர்கள்.");
 }
