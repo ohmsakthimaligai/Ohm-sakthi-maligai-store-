@@ -860,7 +860,24 @@ ${lines}
 மொத்தம்: ${money(total)}
 வாங்கும் முறை: ${delivery.type === "pickup" ? "கடையில் வாங்குதல்" : "வீட்டு டெலிவரி"}
 ${delivery.type === "delivery" ? "முகவரி: " + address + "\nதூரம்: " + delivery.distance + " கி.மீ." : ""}`;
-
+showReceipt({
+  code: orderCode,
+  date: new Date().toLocaleString("ta-IN"),
+  name,
+  phone,
+  items: cart.map(item => ({
+    name: item.name,
+    quantity: item.quantity,
+    price: item.price
+  })),
+  subtotal,
+  fee: delivery.fee,
+  total,
+  delivery: delivery.type === "pickup"
+    ? "கடையில் வாங்குதல்"
+    : "வீட்டு டெலிவரி",
+  address: delivery.type === "delivery" ? address : ""
+});
     cart = [];
     renderCart();
     await loadProducts();
