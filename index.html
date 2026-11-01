@@ -1058,6 +1058,35 @@ function editProduct(id) {
 
   document.getElementById("owner").scrollIntoView({ behavior: "smooth" });
 }
+// பொருளை இணையதளத்தில் மறைத்தல்
+async function deactivateProduct(id) {
+  if (!adminSession) {
+    alert("முதலில் நிர்வாகியாக உள்நுழையவும்.");
+    return;
+  }
+
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  const confirmDelete = confirm(
+    `"${product.name}" பொருளை மறைக்க வேண்டுமா?`
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await api(`products?id=eq.${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ is_active: false })
+    });
+
+    alert("பொருள் மறைக்கப்பட்டது.");
+    await loadProducts();
+
+  } catch (error) {
+    alert("மறைக்க முடியவில்லை: " + error.message);
+  }
+}
 
 // நிர்வாகி ஆர்டர் பட்டியல்
 async function loadOrders() {
