@@ -985,6 +985,19 @@ function printReceipt() {
 }
 // வாடிக்கையாளர் ஆர்டர் நிலையைப் பார்ப்பது
 async function findMyOrder() {
+  const code = document.getElementById("searchOrderCode").value.trim();
+  const phone = document.getElementById("searchOrderPhone").value.trim();
+  const resultBox = document.getElementById("myOrderResult");
+
+  if (!code || !phone) {
+    resultBox.textContent = "ஆர்டர் எண் மற்றும் மொபைல் எண்ணை உள்ளிடவும்.";
+    return;
+  }
+
+  if (!/^[6-9][0-9]{9}$/.test(phone)) {
+    resultBox.textContent = "சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.";
+    return;
+  }
 
   resultBox.textContent = "ஆர்டர் தேடப்படுகிறது...";
 
