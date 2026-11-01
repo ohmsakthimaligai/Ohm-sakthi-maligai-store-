@@ -1303,7 +1303,48 @@ async function deactivateProduct(id) {
     alert("மறைக்க முடியவில்லை: " + error.message);
   }
 }
+// குறைந்த இருப்புப் பொருட்களைப் பட்டியலிடுதல்
+async function loadLowStockProducts() {
+  if (!adminSession) return;
 
+  const box = document.getElementById("lowStockProducts");
+  box.textContent = "இருப்பு விவரங்கள் ஏற்றப்படுகின்றன...";
+
+  try {
+    const lowStock = await api(
+      "products?select=id,name,category,unit,price,stock_qty&is_active=eq.true&stock_qty=lte.2&order=stock_qty.asc"
+    );
+
+    if (!lowStock.length) {
+      box.textContent = "✅ குறைந்த இருப்புள்ள பொருட்கள் இல்லை.";
+      return;
+    }
+
+    box.innerHTML = lowStock.map(product => {
+      const stock = Number(product.stock_qty || 0);
+
+      return `
+        <div class="panel">
+          <b>${escapeHTML(product.name)}</b>
+          <p>${escapeHTML(product.category || "")}</p>
+          <p>
+            ${stock === 0
+              ? '<span class="stock-out">❌ இருப்பு இல்லை</span>'
+              : `<span class="stock-low">⚠️ இருப்பு: ${stock}</span>`
+            }
+          </p>
+          <button type="button" class="gold"
+            onclick="editProduct('${product.id}')">
+            ✏️ இருப்பை மாற்றவும்
+          </button>
+        </div>
+      `;
+    }).join("");
+
+  } catch (error) {
+    box.textContent = "இருப்பு விவரங்களைப் பெற முடியவில்லை: " + error.message;
+  }
+}
 // நிர்வாகி ஆர்டர் பட்டியல்
 
 async function loadOrders() {
