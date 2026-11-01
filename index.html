@@ -1211,6 +1211,7 @@ async function deactivateProduct(id) {
 }
 
 // நிர்வாகி ஆர்டர் பட்டியல்
+
 async function loadOrders() {
   if (!adminSession) return;
 
@@ -1219,8 +1220,13 @@ async function loadOrders() {
 
   try {
     const orders = await api(
-      "orders?select=id,order_code,customer_name,phone,product_name,quantity,total_amount,status,created_at&order=created_at.desc&limit=100"
+      "orders?select=id,order_code,customer_name,phone,product_name,quantity,subtotal,delivery_fee,total,total_amount,order_type,address,distance_km,status,created_at&order=created_at.desc&limit=100"
     );
+
+    window.adminOrdersCache = {};
+    orders.forEach(order => {
+      window.adminOrdersCache[order.id] = order;
+    });
 
     if (!orders.length) {
       box.textContent = "ஆர்டர்கள் இல்லை.";
@@ -1234,8 +1240,9 @@ async function loadOrders() {
         <p>மொபைல்: ${escapeHTML(order.phone)}</p>
         <p>பொருட்கள்: ${escapeHTML(order.product_name || "")}</p>
         <p>எண்ணிக்கை: ${escapeHTML(order.quantity || "")}</p>
-        <p>மொத்தம்: ${money(order.total_amount)}</p>
+        <p>மொத்தம்: ${money(order.total_amount || order.total)}</p>
         <p>நிலை: ${escapeHTML(order.status)}</p>
+
         <select id="status-${order.id}">
           <option value="new" ${order.status === "new" ? "selected" : ""}>புதிய ஆர்டர்</option>
           <option value="preparing" ${order.status === "preparing" ? "selected" : ""}>தயாராகிறது</option>
@@ -1243,13 +1250,23 @@ async function loadOrders() {
           <option value="delivered" ${order.status === "delivered" ? "selected" : ""}>வழங்கப்பட்டது</option>
           <option value="cancelled" ${order.status === "cancelled" ? "selected" : ""}>ரத்து செய்யப்பட்டது</option>
         </select>
-        <button type="button" onclick="updateOrderStatus('${order.id}')">நிலையைப் புதுப்பிக்க</button>
+
+        <button type="button" onclick="updateOrderStatus('${order.id}')">
+          நிலையைப் புதுப்பிக்க
+        </button>
+
+        <button type="button" class="gold"
+          onclick="showAdminReceipt('${order.id}')">
+          🧾 ரசீதைப் பார்க்க / பிரிண்ட் எடுக்க
+        </button>
       </div>
     `).join("");
+
   } catch (error) {
     box.textContent = "ஆர்டர்களைப் பெற முடியவில்லை: " + error.message;
   }
 }
+
 
 // ஆர்டர் நிலையை மாற்றுதல்
 async function updateOrderStatus(id) {
