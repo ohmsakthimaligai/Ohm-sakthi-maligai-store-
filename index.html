@@ -921,6 +921,7 @@ showReceipt({
     renderCart();
     await loadProducts();
 
+
     showMessage("orderMsg", "ஆர்டர் பதிவு செய்யப்பட்டது. WhatsApp-ல் Send அழுத்தவும்.");
 
     window.open(
@@ -1179,6 +1180,7 @@ async function adminLogin() {
 
     renderProducts();
     await loadOrders();
+    await loadLowStockProducts();
 
   } catch (error) {
     console.error("Login Error:", error);
