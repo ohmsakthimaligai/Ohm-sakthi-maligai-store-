@@ -616,7 +616,14 @@ function renderProducts() {
         <h3>${escapeHTML(product.name)}</h3>
         <p>${escapeHTML(product.category || "")}</p>
         <p class="price">${money(product.price)} / ${escapeHTML(product.unit || "எண்ணிக்கை")}</p>
-        <p class="small">இருப்பு: ${stock}</p>
+        <p>
+  ${stock === 0
+    ? '<span class="stock-out">❌ Stock இல்லை</span>'
+    : stock <= 2
+      ? `<span class="stock-low">⚠️ குறைந்த இருப்பு: ${stock}</span>`
+      : `<span class="stock-normal">✅ இருப்பு: ${stock}</span>`
+  }
+</p>
 
         <button type="button"
           onclick="addToCart('${product.id}')"
