@@ -452,7 +452,17 @@ footer h3 {
       <button type="button" onclick="saveProduct()">சேமிக்கவும்</button>
       <button type="button" class="gold" onclick="clearProductForm()">புதிய பொருள்</button>
     </div>
-
+    <div class="panel">
+  <h3>⚠️ குறைந்த இருப்புப் பொருட்கள்</h3>
+  <p class="small">இருப்பு 0, 1 அல்லது 2 உள்ள பொருட்கள்.</p>
+  <button type="button" class="gold"
+    onclick="loadLowStockProducts()">
+    🔄 இருப்பைப் புதுப்பிக்க
+  </button>
+  <div id="lowStockProducts">
+    இருப்பு விவரங்களைப் பார்க்க புதுப்பிக்கவும்.
+  </div>
+</div>
     <div class="panel">
       <h3>📋 ஆர்டர்கள் நிர்வாகம்</h3>
       <button type="button" onclick="loadOrders()">ஆர்டர்களைப் புதுப்பிக்க</button>
