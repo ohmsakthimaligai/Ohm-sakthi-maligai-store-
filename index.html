@@ -957,6 +957,7 @@ async function adminLogin() {
     }
 
     adminSession = data;
+    renderProducts();
     document.getElementById("adminPanel").classList.remove("hidden");
     document.getElementById("adminLogout").classList.remove("hidden");
     showMessage("adminMsg", "நிர்வாகியாக உள்நுழைந்துள்ளீர்கள்.");
