@@ -736,11 +736,25 @@ async function loadProducts() {
 // பொருட்களைக் காட்டுதல்
 function renderProducts() {
   const grid = document.getElementById("productsGrid");
-  const selectedCategory = document.getElementById("categoryFilter").value;
 
-  const filtered = products.filter(product =>
-    !selectedCategory || product.category === selectedCategory
-  );
+  const selectedCategory =
+    document.getElementById("categoryFilter").value;
+
+  const searchText =
+    (document.getElementById("productSearch")?.value || "")
+    .trim()
+    .toLowerCase();
+
+  const filtered = products.filter(product => {
+    const categoryMatch =
+      !selectedCategory || product.category === selectedCategory;
+
+    const searchMatch =
+      (product.name || "").toLowerCase().includes(searchText) ||
+      (product.category || "").toLowerCase().includes(searchText);
+
+    return categoryMatch && searchMatch;
+  });
 
   if (!filtered.length) {
     grid.innerHTML = "<p>பொருட்கள் இல்லை.</p>";
