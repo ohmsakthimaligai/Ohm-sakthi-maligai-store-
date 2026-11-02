@@ -326,14 +326,109 @@ footer h3 {
     gap: 8px;
   }
 }
-  .grid {
-    gap: 8px;
+/* Amazon / Flipkart மாதிரி புதிய முகப்பு */
+.shop-top {
+  background: #14532d;
+  color: white;
+  padding: 15px;
+  text-align: left;
+}
+
+.shop-top h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.shop-search {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.shop-search input {
+  background: white;
+  margin: 0;
+  border-radius: 8px;
+}
+
+.shop-search button {
+  width: 55px;
+  margin: 0;
+  background: #fbbf24;
+  color: #222;
+}
+
+.shop-menu {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 12px;
+  background: white;
+  white-space: nowrap;
+}
+
+.shop-menu a {
+  text-decoration: none;
+  color: #14532d;
+  font-weight: bold;
+  background: #ecfdf3;
+  padding: 9px 13px;
+  border-radius: 20px;
+}
+
+.shop-banner {
+  margin: 14px;
+  padding: 25px 17px;
+  border-radius: 15px;
+  background: linear-gradient(135deg,#14532d,#21834b,#d9a441);
+  color: white;
+  text-align: center;
+}
+
+.shop-banner h2 {
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 24px;
+}
+
+.shop-banner p {
+  font-size: 15px;
+}
+
+.shop-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 9px;
+  padding: 12px;
+  background: white;
+}
+
+.shop-shortcuts a {
+  text-decoration: none;
+  text-align: center;
+  color: #14532d;
+  font-size: 12px;
+  font-weight: bold;
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 12px 3px;
+}
+
+.shop-shortcuts span {
+  display: block;
+  font-size: 25px;
+}
+
+.shop-search input {
+  min-width: 0;
+}
+
+@media(max-width:360px) {
+  .shop-shortcuts {
+    grid-template-columns: repeat(2,1fr);
   }
 }
-</style>
-</head>
-<body>
-<header>
 </style>
 </head>
 <body>
