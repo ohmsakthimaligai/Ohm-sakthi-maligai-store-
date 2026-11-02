@@ -376,5 +376,47 @@ document.getElementById("productSearch").addEventListener("input", function() {
 });
 
 </script>
+<!-- ஆர்டர் உறுதிப்படுத்தல் பகுதி -->
+<section class="customer">
+  <h3>📦 ஆர்டர் உறுதிப்படுத்தல்</h3>
+
+  <label>வாடிக்கையாளர் கைபேசி எண்</label>
+  <input
+    id="confirmPhone"
+    type="tel"
+    placeholder="10 இலக்க எண்ணை உள்ளிடுங்கள்"
+  >
+
+  <label>உறுதிப்படுத்தல் செய்தி</label>
+  <textarea id="confirmMessage"
+    style="width:100%; padding:12px; margin:8px 0;">
+வணக்கம்! உங்கள் ஆர்டர் ஓம் சக்தி மளிகை ஸ்டோரில் உறுதிப்படுத்தப்பட்டுள்ளது. நன்றி!
+  </textarea>
+
+  <button onclick="sendConfirmation()">
+    WhatsApp உறுதிப்படுத்தல் அனுப்புங்கள்
+  </button>
+</section>
+<script>
+function sendConfirmation() {
+  const phone = document.getElementById("confirmPhone").value.trim();
+  const message = document.getElementById("confirmMessage").value.trim();
+
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    alert("சரியான 10 இலக்க கைபேசி எண்ணை உள்ளிடுங்கள்.");
+    return;
+  }
+
+  if (!message) {
+    alert("உறுதிப்படுத்தல் செய்தியை உள்ளிடுங்கள்.");
+    return;
+  }
+
+  const url = "https://wa.me/91" + phone +
+              "?text=" + encodeURIComponent(message);
+
+  window.location.href = url;
+}
+</script>
 </body>
 </html>
