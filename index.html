@@ -667,5 +667,122 @@ renderWishlist();
 updateDeliveryFields();
 </script>
 
+<!-- OM SAKTHI STORE - ADMIN LOGIN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  #adminLoginBox {
+    max-width: 380px;
+    margin: 25px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+    color: #222;
+  }
+
+  #adminLoginBox input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  #adminLoginBox button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #16833b;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+  }
+
+  #adminMessage {
+    margin-top: 12px;
+    color: #b00020;
+  }
+</style>
+
+<section id="adminLoginBox">
+  <h2>🔐 கடை நிர்வாகி Login</h2>
+
+  <input id="adminEmail" type="email"
+         placeholder="உங்கள் Email">
+
+  <input id="adminPassword" type="password"
+         placeholder="Password">
+
+  <button onclick="adminLogin()">Login</button>
+  <button onclick="adminLogout()">Logout</button>
+
+  <p id="adminMessage"></p>
+  <div id="adminDashboard" hidden>
+    <h3>ஓம் சக்தி மளிகை ஸ்டோர்</h3>
+    <p>Admin Login வெற்றிகரமாக முடிந்தது!</p>
+    <p>உங்கள் Owner கணக்கு செயல்பாட்டில் உள்ளது.</p>
+  </div>
+</section>
+
+<script>
+const SUPABASE_URL =
+  "https://ltugxepaeytnhjohoirq.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_OQtJL5E7Bn2tSugNiLaN_A_z13-Iko5";
+
+const shopDB = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function adminLogin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+  const message = document.getElementById("adminMessage");
+  const dashboard = document.getElementById("adminDashboard");
+
+  message.textContent = "Login சரிபார்க்கப்படுகிறது...";
+  dashboard.hidden = true;
+
+  const { data, error } = await shopDB.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    message.textContent = "Login பிழை: " + error.message;
+    return;
+  }
+
+  const { data: profile, error: profileError } = await shopDB
+    .from("staff_profiles")
+    .select("display_name, role, is_active")
+    .eq("user_id", data.user.id)
+    .maybeSingle();
+
+  if (profileError || !profile ||
+      profile.is_active !== true ||
+      !["owner", "staff"].includes(profile.role)) {
+    await shopDB.auth.signOut();
+    message.textContent = "இந்தக் கணக்கிற்கு Admin அனுமதி இல்லை.";
+    return;
+  }
+
+  message.textContent = "Login வெற்றி!";
+  dashboard.hidden = false;
+}
+
+async function adminLogout() {
+  await shopDB.auth.signOut();
+  document.getElementById("adminDashboard").hidden = true;
+  document.getElementById("adminMessage").textContent =
+    "Logout செய்யப்பட்டது.";
+}
+</script>
+<!-- END ADMIN LOGIN -->
+</body>
+</html>
+
 </body>
 </html>
