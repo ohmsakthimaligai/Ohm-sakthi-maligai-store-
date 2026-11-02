@@ -922,7 +922,7 @@ function renderCart() {
 }
 
 // இருப்பிடத்தையும் தூரத்தையும் கணக்கிடுதல்
-function getCustomerLocation() {
+// வீட்டிற்கு டெலிவரி தேர்வு செய்தல்
 function selectHomeDelivery() {
   const radio = document.querySelector(
     'input[name="delivery"][value="home"]'
@@ -931,12 +931,17 @@ function selectHomeDelivery() {
   radio.checked = true;
   radio.dispatchEvent(new Event("change"));
 }
+
+// இருப்பிடத்தைக் கண்டறிதல்
+function getCustomerLocation() {
   if (!navigator.geolocation) {
     showMessage("locationMsg", "உங்கள் மொபைலில் இருப்பிட வசதி இல்லை.");
+    showMessage("topLocationMsg", "இருப்பிட வசதி இல்லை.");
     return;
   }
 
   showMessage("locationMsg", "இருப்பிடம் பெறப்படுகிறது...");
+  showMessage("topLocationMsg", "இருப்பிடம் பெறப்படுகிறது...");
 
   navigator.geolocation.getCurrentPosition(
     position => {
@@ -944,11 +949,13 @@ function selectHomeDelivery() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+
       showMessage("locationMsg", "இருப்பிடம் பெறப்பட்டது.");
-showMessage("topLocationMsg", "✅ GPS இருப்பிடம் கிடைத்தது. வீட்டு முகவரியையும் உள்ளிடவும்.");
+      showMessage("topLocationMsg", "✅ GPS இருப்பிடம் கிடைத்தது. வீட்டு முகவரியையும் உள்ளிடவும்.");
     },
     error => {
       showMessage("locationMsg", "இருப்பிட அனுமதியைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.");
+      showMessage("topLocationMsg", "GPS கிடைக்கவில்லை. அனுமதியைச் சரிபார்க்கவும்.");
     },
     { enableHighAccuracy: true, timeout: 15000 }
   );
