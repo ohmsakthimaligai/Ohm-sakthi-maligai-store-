@@ -1668,6 +1668,99 @@ function sendOrderStatusWhatsApp(id) {
 fillCategoryLists();
 renderCart();
 loadProducts();
+// வாடிக்கையாளர் ஆர்டர் கண்காணிப்பு
+async function trackMyOrder() {
+  const code = document.getElementById("trackOrderCode").value.trim();
+  const phone = document.getElementById("trackPhone").value.trim();
+  const box = document.getElementById("trackingResult");
+
+  if (!code || !phone) {
+    box.textContent = "ஆர்டர் எண் மற்றும் மொபைல் எண்ணை உள்ளிடவும்.";
+    return;
+  }
+
+  if (!/^[6-9][0-9]{9}$/.test(phone)) {
+    box.textContent = "சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.";
+    return;
+  }
+
+  box.textContent = "ஆர்டர் விவரங்கள் தேடப்படுகின்றன...";
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/rpc/get_my_order`,
+      {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          p_order_code: code,
+          p_phone: phone
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("ஆர்டர் விவரங்களைப் பெற முடியவில்லை.");
+    }
+
+    const order = Array.isArray(data) ? data[0] : data;
+
+    if (!order) {
+      box.textContent = "இந்த ஆர்டர் கிடைக்கவில்லை. விவரங்களைச் சரிபார்க்கவும்.";
+      return;
+    }
+
+    if (order.status === "cancelled") {
+      box.innerHTML = `
+        <div class="panel">
+          <h3>❌ ஆர்டர் ரத்து செய்யப்பட்டது</h3>
+          <p>ஆர்டர் எண்: ${escapeHTML(order.order_code || code)}</p>
+        </div>`;
+      return;
+    }
+
+    const steps = [
+      ["new", "புதிய ஆர்டர்", "📝"],
+      ["preparing", "தயாராகிறது", "📦"],
+      ["out_for_delivery", "டெலிவரிக்கு புறப்பட்டது", "🚚"],
+      ["completed", "வழங்கப்பட்டது", "✅"]
+    ];
+
+    const current = steps.findIndex(
+      step => step[0] === order.status
+    );
+
+    box.innerHTML = `
+      <div class="panel">
+        <h3>📦 உங்கள் ஆர்டர் நிலை</h3>
+        <p><b>ஆர்டர் எண்:</b> ${escapeHTML(order.order_code || code)}</p>
+        <p><b>மொத்தம்:</b> ${money(order.total_amount || order.total)}</p>
+        <div style="margin-top:20px;">
+          ${steps.map((step, index) => `
+            <div style="
+              padding:12px;
+              margin:8px 0;
+              border-left:5px solid ${index <= current ? '#15803d' : '#ccc'};
+              background:${index <= current ? '#ecfdf3' : '#f5f5f5'};
+              border-radius:8px;">
+              <b>${index <= current ? '🟢' : '⚪'} ${step[2]} ${step[1]}</b>
+              ${index === current ? '<p style="margin:3px 0;">தற்போதைய நிலை</p>' : ''}
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+
+  } catch (error) {
+    box.textContent = "பிழை: " + error.message;
+  }
+}
 </script>
 <section class="panel" style="margin:15px;padding:15px;">
   <h2>📦 உங்கள் ஆர்டரைக் கண்காணிக்கவும்</h2>
