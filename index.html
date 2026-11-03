@@ -1669,5 +1669,24 @@ fillCategoryLists();
 renderCart();
 loadProducts();
 </script>
+<section class="panel" style="margin:15px;padding:15px;">
+  <h2>📦 உங்கள் ஆர்டரைக் கண்காணிக்கவும்</h2>
+  <p>ஆர்டர் எண் மற்றும் மொபைல் எண்ணை உள்ளிடவும்.</p>
+
+  <input id="trackOrderCode"
+    type="text"
+    placeholder="ஆர்டர் எண் (OS123456789)">
+
+  <input id="trackPhone"
+    type="tel"
+    placeholder="மொபைல் எண்">
+
+  <button type="button" onclick="trackMyOrder()">
+    🔍 ஆர்டர் நிலையைப் பார்க்க
+  </button>
+
+  <div id="trackingResult"></div>
+</section>
+
 </body>
 </html>
