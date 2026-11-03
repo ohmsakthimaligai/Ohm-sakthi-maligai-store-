@@ -1573,7 +1573,7 @@ async function loadOrders() {
           <option value="new" ${order.status === "new" ? "selected" : ""}>புதிய ஆர்டர்</option>
           <option value="preparing" ${order.status === "preparing" ? "selected" : ""}>தயாராகிறது</option>
           <option value="out_for_delivery" ${order.status === "out_for_delivery" ? "selected" : ""}>டெலிவரிக்கு புறப்பட்டது</option>
-          <option value="delivered" ${order.status === "delivered" ? "selected" : ""}>வழங்கப்பட்டது</option>
+          <option value="completed" ${order.status === "completed" ? "selected" : ""}>வழங்கப்பட்டது</option>
           <option value="cancelled" ${order.status === "cancelled" ? "selected" : ""}>ரத்து செய்யப்பட்டது</option>
         </select>
 
