@@ -1616,6 +1616,53 @@ async function updateOrderStatus(id) {
     alert("நிலையை மாற்ற முடியவில்லை: " + error.message);
   }
 }
+// WhatsApp மூலம் ஆர்டர் நிலையைத் தெரிவிக்க
+function sendOrderStatusWhatsApp(id) {
+  const order = window.adminOrdersCache[id];
+
+  if (!order) {
+    alert("ஆர்டர் விவரம் கிடைக்கவில்லை.");
+    return;
+  }
+
+  const statusNames = {
+    new: "புதிய ஆர்டர்",
+    preparing: "தயாராகிறது",
+    out_for_delivery: "டெலிவரிக்கு புறப்பட்டது",
+    completed: "வழங்கப்பட்டது",
+    cancelled: "ரத்து செய்யப்பட்டது"
+  };
+
+  const statusName = statusNames[order.status];
+
+  if (!statusName) {
+    alert("ஆர்டர் நிலை சரிபார்க்கப்படவில்லை.");
+    return;
+  }
+
+  const phone = String(order.phone || "").replace(/\D/g, "");
+
+  if (!phone) {
+    alert("வாடிக்கையாளர் மொபைல் எண் இல்லை.");
+    return;
+  }
+
+  const message =
+    `வணக்கம் ${order.customer_name || ""}!\n` +
+    `ஓம் சக்தி மளிகை ஸ்டோர், தே.புடையூர்.\n\n` +
+    `ஆர்டர் எண்: ${order.order_code || order.id}\n` +
+    `தற்போதைய ஆர்டர் நிலை: ${statusName}\n\n` +
+    `நன்றி!`;
+
+  const whatsappPhone =
+    phone.length === 10 ? "91" + phone : phone;
+
+  const url =
+    "https://wa.me/" + whatsappPhone +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
 
 // பக்கம் திறக்கும்போது
 fillCategoryLists();
