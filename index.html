@@ -1580,6 +1580,10 @@ async function loadOrders() {
         <button type="button" onclick="updateOrderStatus('${order.id}')">
           நிலையைப் புதுப்பிக்க
         </button>
+        <button type="button" class="gold"
+  onclick="sendOrderStatusWhatsApp('${order.id}')">
+  📲 WhatsApp தகவல் அனுப்பு
+</button>
 
         <button type="button" class="gold"
           onclick="showAdminReceipt('${order.id}')">
