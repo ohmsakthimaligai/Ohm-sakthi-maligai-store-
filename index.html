@@ -1661,19 +1661,14 @@ function sendOrderStatusWhatsApp(id) {
 fillCategoryLists();
 renderCart();
 loadProducts();
-// வாடிக்கையாளர் ஆர்டர் கண்காணிப்பு
+
+// வாடிக்கையாளர் Order ID மூலம் ஆர்டர் கண்காணிப்பு
 async function trackMyOrder() {
   const code = document.getElementById("trackOrderCode").value.trim();
-  const phone = document.getElementById("trackPhone").value.trim();
   const box = document.getElementById("trackingResult");
 
-  if (!code || !phone) {
-    box.textContent = "ஆர்டர் எண் மற்றும் மொபைல் எண்ணை உள்ளிடவும்.";
-    return;
-  }
-
-  if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    box.textContent = "சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.";
+  if (!code) {
+    box.textContent = "ஆர்டர் எண்ணை உள்ளிடவும்.";
     return;
   }
 
@@ -1681,7 +1676,7 @@ async function trackMyOrder() {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/rpc/get_my_order`,
+      `${SUPABASE_URL}/rest/v1/rpc/get_my_order_by_code`,
       {
         method: "POST",
         headers: {
@@ -1690,8 +1685,7 @@ async function trackMyOrder() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          p_order_code: code,
-          p_phone: phone
+          p_order_code: code
         })
       }
     );
@@ -1705,7 +1699,7 @@ async function trackMyOrder() {
     const order = Array.isArray(data) ? data[0] : data;
 
     if (!order) {
-      box.textContent = "இந்த ஆர்டர் கிடைக்கவில்லை. விவரங்களைச் சரிபார்க்கவும்.";
+      box.textContent = "இந்த ஆர்டர் எண் கிடைக்கவில்லை.";
       return;
     }
 
@@ -1725,15 +1719,14 @@ async function trackMyOrder() {
       ["completed", "வழங்கப்பட்டது", "✅"]
     ];
 
-    const current = steps.findIndex(
-      step => step[0] === order.status
-    );
+    const current = steps.findIndex(step => step[0] === order.status);
 
     box.innerHTML = `
       <div class="panel">
         <h3>📦 உங்கள் ஆர்டர் நிலை</h3>
         <p><b>ஆர்டர் எண்:</b> ${escapeHTML(order.order_code || code)}</p>
-        <p><b>மொத்தம்:</b> ${money(order.total_amount || order.total)}</p>
+        <p><b>மொத்தம்:</b> ${money(order.total_amount)}</p>
+        <p><b>வாங்கும் முறை:</b> ${escapeHTML(order.order_type || "")}</p>
         <div style="margin-top:20px;">
           ${steps.map((step, index) => `
             <div style="
@@ -1747,6 +1740,7 @@ async function trackMyOrder() {
             </div>
           `).join("")}
         </div>
+        <p><b>தேதி:</b> ${escapeHTML(order.created_at || "")}</p>
       </div>
     `;
 
@@ -1754,6 +1748,8 @@ async function trackMyOrder() {
     box.textContent = "பிழை: " + error.message;
   }
 }
+
+     
 </script>
 <section class="panel" style="margin:15px;padding:15px;">
   <h2>📦 உங்கள் ஆர்டரைக் கண்காணிக்கவும்</h2>
