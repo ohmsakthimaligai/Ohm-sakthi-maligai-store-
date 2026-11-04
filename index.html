@@ -1228,19 +1228,15 @@ function printReceipt() {
     printWindow.print();
   }, 1000);
 }
-// வாடிக்கையாளர் ஆர்டர் நிலையைப் பார்ப்பது
+
+
+// வாடிக்கையாளர் Order ID மூலம் ஆர்டர் நிலையைப் பார்ப்பது
 async function findMyOrder() {
   const code = document.getElementById("searchOrderCode").value.trim();
-  const phone = document.getElementById("searchOrderPhone").value.trim();
   const resultBox = document.getElementById("myOrderResult");
 
-  if (!code || !phone) {
-    resultBox.textContent = "ஆர்டர் எண் மற்றும் மொபைல் எண்ணை உள்ளிடவும்.";
-    return;
-  }
-
-  if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    resultBox.textContent = "சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.";
+  if (!code) {
+    resultBox.textContent = "ஆர்டர் எண்ணை உள்ளிடவும்.";
     return;
   }
 
@@ -1248,7 +1244,7 @@ async function findMyOrder() {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/rpc/get_my_order`,
+      `${SUPABASE_URL}/rest/v1/rpc/get_my_order_by_code`,
       {
         method: "POST",
         headers: {
@@ -1257,8 +1253,7 @@ async function findMyOrder() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          p_order_code: code,
-          p_phone: phone
+          p_order_code: code
         })
       }
     );
@@ -1272,15 +1267,13 @@ async function findMyOrder() {
     const order = Array.isArray(data) ? data[0] : data;
 
     if (!order) {
-      resultBox.textContent = "இந்த விவரங்களில் ஆர்டர் கிடைக்கவில்லை.";
+      resultBox.textContent = "இந்த ஆர்டர் எண் கிடைக்கவில்லை.";
       return;
     }
 
     resultBox.innerHTML = `
       <div class="panel">
-        <p><b>ஆர்டர் எண்:</b> ${escapeHTML(order.order_code || code)}</p>
-        <p><b>பொருட்கள்:</b> ${escapeHTML(order.product_name || "")}</p>
-        <p><b>எண்ணிக்கை:</b> ${escapeHTML(order.quantity || "")}</p>
+        <p><b>ஆர்டர் எண்:</b> ${escapeHTML(order.order_code || "")}</p>
         <p><b>மொத்தம்:</b> ${money(order.total_amount)}</p>
         <p><b>வாங்கும் முறை:</b> ${escapeHTML(order.order_type || "")}</p>
         <p><b>ஆர்டர் நிலை:</b> ${escapeHTML(order.status || "")}</p>
