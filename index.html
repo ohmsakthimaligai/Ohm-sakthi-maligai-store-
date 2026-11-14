@@ -1771,6 +1771,14 @@ async function trackMyOrder() {
 
   <div id="trackingResult"></div>
 </section>
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("App Ready"))
+      .catch(error => console.log("Service Worker Error:", error));
+  });
+}
+</script>
 </body>
 </html>
